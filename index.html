@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>हिन्दी पखवाड़ा प्रश्नोत्तरी 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Yantramanav:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --bg-grad: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); --accent-color: #f97316; }
+        body { background: var(--bg-grad); background-attachment: fixed; background-size: cover; font-family: 'Yantramanav', 'Outfit', sans-serif; touch-action: manipulation; }
+        .theme-main { background: radial-gradient(circle at 10% 20%, rgb(30, 20, 50) 0%, rgb(15, 23, 42) 90%); }
+        .theme-main::before {
+            content: ""; position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5; pointer-events: none; z-index: 0;
+        }
+        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3); }
+        .glass-dark { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); }
+        .app-view { display: none !important; }
+        .app-view.active-view { display: flex !important; animation: scaleIn 0.3s ease-out forwards; }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .buzzer-btn { background: radial-gradient(circle, #ff4b4b 0%, #cc0000 100%); box-shadow: 0 15px 0 #880000, 0 20px 20px rgba(0,0,0,0.5); transition: all 0.1s; border: 4px solid #fff; }
+        .buzzer-btn:active, .buzzer-btn.sim-active { transform: translateY(10px); box-shadow: 0 5px 0 #880000, 0 10px 10px rgba(0,0,0,0.5); }
+        .buzzer-locked { filter: grayscale(100%); opacity: 0.5; pointer-events: none; box-shadow: 0 5px 0 #333, 0 10px 10px rgba(0,0,0,0.5); transform: translateY(10px); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 4px; }
+        .pulse-red { animation: pulseRed 2s infinite; }
+        @keyframes pulseRed { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        @keyframes floatUpFade { 0% { opacity: 0; transform: translateY(50px) scale(0.8); } 15% { opacity: 1; transform: translateY(0) scale(1.1); } 30% { opacity: 1; transform: translateY(0) scale(1); } 70% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-100px) scale(0.9); } }
+        .score-anim { animation: floatUpFade 4.5s ease-in-out forwards; }
+        @keyframes intensePulse { 0% { transform: scale(1); color: #ef4444; } 50% { transform: scale(1.15); color: #b91c1c; text-shadow: 0 0 30px rgba(239,68,68,0.8); } 100% { transform: scale(1); color: #ef4444; } }
+        .timer-intense { animation: intensePulse 1s infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-gray-800 antialiased bg-slate-900 overflow-x-hidden">
+
+    <header id="top-header" class="bg-slate-900/90 backdrop-blur-md shadow-lg py-3 px-4 lg:px-6 flex justify-between items-center z-20 sticky top-0 border-b border-slate-700">
+        <h1 class="text-xl lg:text-2xl font-black gradient-text tracking-wide uppercase">हिन्दी पखवाड़ा प्रश्नोत्तरी</h1>
+        <div class="flex items-center gap-3">
+            <span id="role-badge" class="hidden px-3 py-1 rounded-full text-xs font-black bg-slate-800 text-slate-300 border border-slate-600 uppercase tracking-widest"></span>
+            <button id="btn-global-home" onclick="goHome()" class="text-slate-400 hover:text-white transition p-2 rounded-full" title="Home">
+                <i class="fa-solid fa-home"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow relative flex flex-col h-full">
+        <!-- Landing View -->
+        <section id="view-landing" class="app-view active-view flex-col p-4 max-w-lg mx-auto justify-center flex-grow w-full items-center gap-6">
+             <div class="w-full glass-panel p-10 rounded-[2rem] shadow-2xl flex flex-col gap-4 relative overflow-hidden">
+                 <h2 class="text-3xl font-black text-slate-800 text-center uppercase tracking-widest mb-2 relative z-10">सिस्टम एक्सेस</h2>
+                 
+                 <div id="landing-reg-container" class="w-full space-y-3 relative z-10">
+                     <button onclick="initAudioAndSetRole('team-register')" class="w-full py-4 rounded-2xl font-black text-sm uppercase tracking-widest text-white bg-blue-600 shadow-xl shadow-blue-600/30 hover:bg-blue-700 transition active:scale-95 border border-blue-500">
+                         <i class="fa-solid fa-users text-xl block mb-2"></i> टीम एक्सेस (Team Access)
+                     </button>
+                 </div>
+                 
+                 <div class="grid grid-cols-2 gap-4 mt-2 border-t pt-6 relative z-10">
+                     <button onclick="initAudioAndRequestAdmin('organizer')" class="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest text-slate-700 bg-slate-100 border shadow-sm hover:bg-slate-200 transition active:scale-95">
+                         <i class="fa-solid fa-user-tie mb-1 block text-lg"></i> आयोजक (Org)
+                     </button>
+                     <button onclick="initAudioAndRequestAdmin('main')" class="w-full py-4 rounded-xl font-bold text-xs uppercase tracking-widest text-slate-700 bg-slate-100 border shadow-sm hover:bg-slate-200 transition active:scale-95">
+                         <i class="fa-solid fa-desktop mb-1 block text-lg"></i> स्क्रीन (Screen)
+                     </button>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Team Register View -->
+        <section id="view-team-register" class="app-view flex-col p-4 max-w-md mx-auto justify-center flex-grow w-full">
+            <div class="w-full flex justify-start mb-4">
+                <button onclick="goHome()" class="px-4 py-2 bg-slate-800 text-slate-200 rounded-full font-bold text-xs uppercase shadow-sm active:scale-95 transition"><i class="fa-solid fa-arrow-left mr-2"></i> वापस</button>
+            </div>
+            <div class="glass-panel p-8 rounded-[2rem] shadow-2xl w-full">
+                <h2 class="text-3xl font-black text-slate-800 mb-1">टीम एक्सेस</h2>
+                <p class="text-slate-500 mb-4 text-[10px] font-bold uppercase">Connect to your team</p>
+                
+                <div id="reg-closed-banner" class="hidden mb-4 p-3 bg-red-100 border border-red-300 text-red-600 rounded-xl text-center font-bold text-xs">
+                    <i class="fa-solid fa-lock mr-1"></i> Registration is Closed. Teams can only Reconnect.
+                </div>
+
+                <form id="form-recon-team" onsubmit="handleTeamReconnect(event)" class="space-y-4">
+                    <select id="rec-tname" required class="w-full p-3 rounded-xl border-2 border-slate-200 font-bold text-slate-800 focus:border-blue-500 outline-none"><option value="">टीम चुनें (Select...)</option></select>
+                    <input type="text" id="rec-tsecret" required class="w-full p-3 rounded-xl border-2 border-slate-200 font-bold text-slate-800 focus:border-blue-500 outline-none" placeholder="गुप्त पिन (4-digit PIN)">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-black text-lg uppercase transition-all active:scale-95 hover:bg-blue-700 shadow-xl">Join Session</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Team Playing View -->
+        <section id="view-team" class="app-view flex-col p-2 sm:p-4 max-w-md mx-auto flex-grow w-full">
+            <div id="team-state-waiting" class="glass-panel rounded-[2rem] p-8 text-center flex flex-col items-center justify-center flex-grow shadow-lg relative overflow-hidden">
+                <i class="fa-solid fa-hourglass-half text-5xl text-blue-500 mb-6 animate-pulse"></i>
+                <h3 class="text-3xl font-black text-slate-800 mb-1" id="team-wait-title">प्रतीक्षा करें...</h3>
+                <p class="text-slate-500 font-bold uppercase text-xs mb-8" id="team-wait-desc">Look at the main screen</p>
+                <div class="px-6 py-2 bg-slate-100 rounded-full text-sm font-black text-slate-700 border-2 border-slate-200" id="team-identity-display"></div>
+                <div class="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-200" id="team-score-display">
+                    <span class="text-xs font-bold text-emerald-700 uppercase">आपका स्कोर (Score)</span>
+                    <div class="text-3xl font-black text-emerald-800" id="team-score-val">0</div>
+                </div>
+            </div>
+
+            <div id="team-state-active" class="hidden h-full flex flex-col gap-4">
+                <div class="glass-panel p-4 rounded-2xl flex flex-col gap-2 shadow-sm shrink-0">
+                    <div class="flex justify-between items-center w-full">
+                        <span class="text-[10px] font-black bg-blue-600 text-white px-3 py-1 rounded-full uppercase shadow-sm" id="team-mode-badge">Mode</span>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-regular fa-clock text-slate-500"></i>
+                            <span class="text-xl font-mono font-black text-slate-800" id="team-timer-text">--s</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-panel p-4 sm:p-6 rounded-[2rem] flex-grow flex flex-col items-center justify-center shadow-xl overflow-y-auto w-full relative" id="team-dynamic-area">
+                    <!-- Dynamic Content injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Projector View -->
+        <section id="view-main-screen" class="app-view flex w-full h-full absolute inset-0 z-50 theme-main overflow-hidden">
+            <audio id="bgm-player" loop src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" preload="auto"></audio>
+            
+            <button onclick="toggleFullScreen()" class="absolute bottom-4 right-4 text-white/50 hover:text-white z-[100]"><i class="fa-solid fa-expand text-2xl"></i></button>
+            <div id="projector-animations" class="absolute inset-0 pointer-events-none z-[150] overflow-hidden"></div>
+            
+            <!-- Global Back to Home Button on Main Screen -->
+            <button onclick="goHome()" class="absolute top-4 right-4 text-white/30 hover:text-white z-[100] bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-md transition-all hover:scale-110 border border-white/10 font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-home"></i> वापस जाएं</button>
+
+            <div id="projector-qr-overlay" class="hidden absolute top-8 right-[27%] bg-white/95 backdrop-blur p-5 rounded-3xl shadow-2xl border-4 border-slate-800 z-[60] flex flex-col items-center transform rotate-2">
+                <h3 class="text-sm font-black uppercase text-slate-800 mb-3 tracking-widest">स्कैन करके जुड़ें</h3>
+                <canvas id="qr-canvas-projector" class="w-40 h-40 rounded-xl mb-2"></canvas>
+                <p class="text-[10px] font-bold text-slate-500 uppercase">Join Session</p>
+            </div>
+            
+            <div id="proj-reg-status" class="absolute top-8 left-8 z-[60] px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest shadow-lg border-2 backdrop-blur-md"></div>
+
+            <div id="projector-content" class="flex-grow h-full flex flex-col justify-center items-center p-8 relative z-10 w-3/4 max-w-[95%]">
+                <!-- States injected here via JS -->
+            </div>
+            
+            <div id="projector-sidebar" class="w-1/4 min-w-[320px] h-full bg-slate-900/80 backdrop-blur-3xl border-l border-white/10 p-6 flex flex-col z-20 shadow-2xl relative overflow-hidden transition-all">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+                <h2 class="text-3xl font-black text-white uppercase tracking-widest mb-6 border-b-2 border-white/10 pb-4 text-center drop-shadow-md">
+                    <span id="sidebar-title-text">लीडरबोर्ड</span>
+                    <span id="sidebar-subtitle-text" class="block text-xs text-slate-400 mt-1 font-bold">LIVE STANDINGS</span>
+                </h2>
+                <div id="sidebar-leaderboard-list" class="flex flex-col gap-3 overflow-y-auto flex-grow pr-2 pb-10">
+                    <!-- Teams / Pool injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Organizer View -->
+        <section id="view-organizer" class="app-view flex-col lg:flex-row p-2 lg:p-4 gap-4 max-w-7xl mx-auto flex-grow h-full w-full">
+            <!-- Left Panel: Setup -->
+            <div class="glass-panel rounded-2xl flex flex-col w-full lg:w-5/12 shadow-lg overflow-hidden h-full border border-slate-200 bg-white">
+                <div class="flex bg-slate-50 border-b shrink-0 relative">
+                    <div id="org-tab-bg-highlight" class="absolute bottom-0 left-0 h-1 w-1/2 bg-blue-600 transition-all duration-300"></div>
+                    <button id="tab-btn-qs" onclick="toggleOrgTab('qs')" class="flex-1 py-3 font-black text-blue-700 uppercase text-xs transition-colors hover:bg-slate-100 relative z-10">प्रश्न (Questions)</button>
+                    <button id="tab-btn-teams" onclick="toggleOrgTab('teams')" class="flex-1 py-3 font-bold text-slate-500 uppercase text-xs transition-colors hover:bg-slate-100 relative z-10">टीमें (Teams) <span id="team-count-badge" class="ml-1 bg-slate-200 text-slate-600 px-2 rounded-full text-[10px]">0</span></button>
+                </div>
+                
+                <div id="org-tab-qs" class="flex flex-col flex-grow overflow-hidden">
+                    <div class="p-3 bg-white flex justify-between items-center border-b shrink-0">
+                        <select id="org-quiz-select" class="p-2 border rounded text-xs font-bold w-2/3 outline-none focus:border-blue-500"><option value="default">Default Prashnotri Session</option></select>
+                        <button onclick="confirmAction('क्या आप पूरी प्रश्नोत्तरी और उसके सभी राउंड्स हटाना चाहते हैं? (Delete Entire Prashnotri)', deleteQuiz)" class="px-3 py-2 bg-red-100 hover:bg-red-200 text-red-600 rounded text-xs font-black transition"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <div class="p-3 flex-grow overflow-y-auto space-y-4 bg-slate-50/50" id="org-rounds-container"></div>
+                    <div class="p-2 border-t bg-slate-100 grid grid-cols-2 gap-2 shrink-0">
+                        <button onclick="openRoundRulesModal()" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-black text-[10px] uppercase shadow-sm transition"><i class="fa-solid fa-layer-group"></i> नया राउंड</button>
+                        <button onclick="openModal('modal-csv-import')" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-black text-[10px] uppercase shadow-sm transition"><i class="fa-solid fa-file-csv"></i> आयात (CSV Import)</button>
+                    </div>
+                </div>
+
+                <div id="org-tab-teams" class="hidden flex-col flex-grow overflow-hidden">
+                    <div class="p-2 flex gap-2 border-b shrink-0 bg-white">
+                        <button onclick="openModal('modal-random-teams')" class="flex-1 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-black text-[10px] uppercase shadow-sm transition active:scale-95"><i class="fa-solid fa-users-viewfinder"></i> पूल प्रबंधन (Manage Pool)</button>
+                        <button onclick="openModal('modal-org-add-team')" class="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-black text-[10px] uppercase shadow-sm transition active:scale-95"><i class="fa-solid fa-plus"></i> टीम जोड़ें (Add Team)</button>
+                    </div>
+                    <div class="p-3 flex-grow overflow-y-auto space-y-2 bg-slate-50" id="org-teams-list"></div>
+                    <div class="p-2 border-t bg-red-50 shrink-0">
+                        <button onclick="confirmAction('क्या आप पूरा डेटा हटाना चाहते हैं? (Wipe all teams & scores)', wipeDatabase)" class="w-full py-2 bg-red-600 text-white rounded-lg font-black text-xs uppercase shadow-sm hover:bg-red-700 active:scale-95"><i class="fa-solid fa-power-off"></i> हार्ड रीसेट (Wipe Data)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Live Control -->
+            <div class="glass-dark rounded-2xl flex flex-col w-full lg:w-7/12 shadow-2xl h-full overflow-hidden border border-slate-700">
+                <div class="bg-slate-900 p-3 flex justify-between items-center shrink-0 border-b border-slate-700 flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <span id="org-status-badge" class="px-3 py-1.5 rounded text-[10px] font-black bg-slate-700 text-white uppercase tracking-wider shadow-inner">WAITING</span>
+                        <button id="btn-toggle-reg" onclick="toggleRegistration()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[10px] font-black shadow transition active:scale-95 border border-emerald-400">Reg: OPEN</button>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 flex-wrap">
+                        <div class="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-600">
+                            <button id="btn-bgm-toggle" onclick="toggleBGM()" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-music"></i></button>
+                            <input type="range" id="bgm-vol-slider" min="0" max="1" step="0.1" value="0.5" onchange="updateBGMVolume()" class="w-16 accent-blue-500">
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button onclick="toggleLiveQR()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-[10px] font-black shadow transition active:scale-95"><i class="fa-solid fa-qrcode mr-1"></i> QR</button>
+                            <button onclick="setMainScreenState('intermission')" class="px-3 py-1.5 bg-slate-600 hover:bg-slate-500 text-white rounded text-[10px] font-black shadow transition active:scale-95" title="Clear Screen"><i class="fa-solid fa-broom"></i> क्लियर</button>
+                            <button onclick="setMainScreenState('rulebook')" class="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded text-[10px] font-black shadow transition active:scale-95"><i class="fa-solid fa-book mr-1"></i> नियम पुस्तिका</button>
+                            <button onclick="showRoundLeaderboard()" class="px-3 py-1.5 bg-orange-600 hover:bg-orange-500 text-white border border-orange-500 rounded text-[10px] font-black shadow transition active:scale-95">एंड राउंड</button>
+                            <button onclick="confirmAction('End the entire Prashnotri and show overall winners?', endQuizFinal)" class="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded text-[10px] font-black shadow transition active:scale-95"><i class="fa-solid fa-trophy mr-1"></i> समाप्त</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 flex-grow flex flex-col overflow-y-auto bg-slate-800 relative" id="org-live-view"></div>
+
+                <div class="p-3 bg-slate-900 border-t border-slate-700 flex items-center gap-2 shrink-0 flex-wrap">
+                    <span class="text-[10px] font-black text-slate-400 uppercase w-full block mb-1">मैनुअल स्कोर (Manual Override)</span>
+                    <select id="org-score-team" class="flex-grow p-2 rounded bg-slate-800 text-white border border-slate-600 text-sm font-bold outline-none"><option value="">टीम चुनें...</option></select>
+                    <button onclick="adjustManualScore('minus')" class="px-3 py-2 bg-red-600 hover:bg-red-500 text-white font-black rounded shadow transition active:scale-95">- Pts</button>
+                    <button onclick="adjustManualScore('plus')" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded shadow transition active:scale-95">+ Pts</button>
+                    <span class="text-slate-600">|</span>
+                    <input type="number" id="org-score-val" class="w-16 p-2 rounded bg-slate-800 text-white border border-slate-600 text-sm font-bold outline-none text-center" placeholder="Pts">
+                    <button onclick="adjustManualScore('custom')" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white font-black rounded shadow transition active:scale-95"><i class="fa-solid fa-check"></i></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-container" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4">
+        
+        <div id="modal-alert" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full transform transition-all">
+            <h3 class="text-lg font-black text-slate-800 mb-2">संदेश (Message)</h3>
+            <p class="text-sm font-bold text-slate-600 mb-6" id="alert-msg"></p>
+            <div class="flex justify-end"><button onclick="closeModal('modal-alert')" class="px-4 py-2 rounded-lg font-bold text-white bg-blue-600 hover:bg-blue-700">ठीक है (OK)</button></div>
+        </div>
+
+        <div id="modal-confirm" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full transform transition-all">
+            <h3 class="text-lg font-black text-slate-800 mb-2" id="confirm-title">पुष्टि करें</h3>
+            <p class="text-sm font-bold text-slate-600 mb-6" id="confirm-msg"></p>
+            <div class="flex gap-3 justify-end">
+                <button onclick="closeModal('modal-confirm')" class="px-4 py-2 rounded-lg font-bold text-slate-600 bg-slate-100 hover:bg-slate-200">रद्द करें (Cancel)</button>
+                <button id="confirm-btn-yes" class="px-4 py-2 rounded-lg font-bold text-white bg-red-600 hover:bg-red-700">हाँ (Yes)</button>
+            </div>
+        </div>
+
+        <div id="modal-admin-auth" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full">
+            <h3 class="text-xl font-black text-slate-800 mb-4 uppercase"><i class="fa-solid fa-lock text-slate-400 mr-2"></i> एडमिन पिन (Admin PIN)</h3>
+            <input type="password" id="input-admin-pin" class="w-full p-3 border-2 border-slate-200 rounded-xl mb-4 font-black text-center tracking-[0.5em] text-xl outline-none focus:border-blue-500" placeholder="••••">
+            <button onclick="verifyAdminPin()" class="w-full py-3 bg-slate-900 text-white rounded-xl font-black uppercase tracking-widest hover:bg-slate-800 active:scale-95 transition">Enter</button>
+            <button onclick="closeModal('modal-admin-auth')" class="w-full mt-2 py-2 text-xs font-bold text-slate-500 uppercase">Cancel</button>
+        </div>
+
+        <div id="modal-edit-team" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full">
+            <h3 class="text-xl font-black text-slate-800 mb-4 uppercase">टीम संपादित करें (Edit Team)</h3>
+            <div class="space-y-3">
+                <input type="hidden" id="edit-team-id">
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">टीम का नाम</label><input type="text" id="edit-team-name" class="w-full p-2 border rounded font-bold"></div>
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">कुल स्कोर (Score)</label><input type="number" id="edit-team-score" class="w-full p-2 border rounded font-bold text-blue-600"></div>
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">सदस्य (Members comma separated)</label><input type="text" id="edit-team-members" class="w-full p-2 border rounded text-sm"></div>
+                <div class="flex gap-2 pt-2">
+                    <button onclick="saveTeamEdit()" class="flex-1 py-2 bg-blue-600 text-white rounded font-black text-sm uppercase shadow">सहेजें (Save)</button>
+                    <button onclick="closeModal('modal-edit-team')" class="py-2 px-4 bg-slate-200 text-slate-700 rounded font-bold text-sm">रद्द</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-org-add-team" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full">
+            <h3 class="text-xl font-black text-slate-800 mb-4 uppercase border-b pb-2"><i class="fa-solid fa-user-plus text-emerald-600 mr-2"></i> टीम जोड़ें (Add Team)</h3>
+            <div class="space-y-3">
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">टीम का नाम *</label><input type="text" id="add-team-name" class="w-full p-2 border-2 border-slate-200 rounded-xl font-bold outline-none focus:border-emerald-500"></div>
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">गुप्त पिन (PIN) *</label><input type="text" id="add-team-pin" class="w-full p-2 border-2 border-slate-200 rounded-xl font-bold outline-none focus:border-emerald-500" placeholder="e.g., 1234"></div>
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">स्कोर (Score)</label><input type="number" id="add-team-score" class="w-full p-2 border-2 border-slate-200 rounded-xl font-bold text-blue-600 outline-none focus:border-emerald-500" value="0"></div>
+                <div><label class="block text-[10px] font-black text-slate-500 uppercase mb-1">सदस्य (Members comma separated) *</label><input type="text" id="add-team-members" class="w-full p-2 border-2 border-slate-200 rounded-xl text-sm outline-none focus:border-emerald-500" placeholder="Mem1, Mem2, Mem3"></div>
+                <div class="flex gap-2 pt-2">
+                    <button onclick="orgSaveNewTeam()" class="flex-1 py-3 bg-emerald-600 text-white rounded-xl font-black text-sm uppercase shadow hover:bg-emerald-700 active:scale-95 transition">सहेजें (Save)</button>
+                    <button onclick="closeModal('modal-org-add-team')" class="py-3 px-4 bg-slate-200 text-slate-700 rounded-xl font-bold text-sm uppercase active:scale-95 transition">रद्द</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-random-teams" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <h3 class="text-xl font-black text-slate-800 mb-4 uppercase border-b pb-2 flex justify-between items-center">
+                <span><i class="fa-solid fa-users-viewfinder text-purple-600 mr-2"></i> पूल प्रबंधन (Manage Pool)</span>
+                <button onclick="clearParticipantPool()" class="text-red-500 hover:text-red-700 text-sm" title="Clear Pool"><i class="fa-solid fa-trash"></i></button>
+            </h3>
+            
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="org-pool-add-name" class="flex-grow p-2 border-2 border-slate-200 rounded-xl font-bold focus:border-purple-500 outline-none" placeholder="प्रतिभागी का नाम (Name)">
+                <button onclick="orgAddParticipant()" class="px-4 py-2 bg-purple-600 text-white font-black rounded-xl hover:bg-purple-700 transition active:scale-95 shadow"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+            <div class="mb-4 bg-slate-50 p-3 rounded-xl border border-slate-200 h-40 overflow-y-auto" id="org-pool-list-container">
+                <!-- Participants injected here via JS -->
+            </div>
+            
+            <div class="mb-6">
+                <label class="block text-[10px] font-black text-slate-500 uppercase mb-1">सदस्य प्रति टीम (Members per team)</label>
+                <select id="rt-size" class="w-full p-3 border-2 border-slate-200 rounded-xl font-bold bg-white focus:border-purple-500 outline-none">
+                    <option value="3">3 Members</option>
+                    <option value="4">4 Members</option>
+                    <option value="5">5 Members</option>
+                </select>
+            </div>
+            
+            <div id="rt-preview-container" class="hidden mb-6 bg-slate-50 p-3 rounded-xl border border-slate-200 max-h-48 overflow-y-auto space-y-3">
+                <!-- Preview injected here -->
+            </div>
+
+            <div class="flex gap-2" id="rt-action-btns">
+                <button onclick="closeModal('modal-random-teams')" class="py-3 px-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold uppercase text-xs transition active:scale-95">रद्द</button>
+                <button onclick="generateRandomTeamsPreview()" class="flex-grow py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-black uppercase text-xs shadow active:scale-95 transition tracking-widest">टीमें बनाएं (Preview)</button>
+            </div>
+            <div class="flex gap-2 hidden" id="rt-confirm-btns">
+                <button onclick="cancelPreview()" class="py-3 px-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold uppercase text-xs transition active:scale-95">पीछे (Back)</button>
+                <button onclick="confirmProjectTeams()" class="flex-grow py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black uppercase text-xs shadow active:scale-95 transition tracking-widest">स्क्रीन पर प्रोजेक्ट करें</button>
+            </div>
+        </div>
+
+        <div id="modal-round-rules" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 border-b pb-2"><h3 class="text-xl font-black text-slate-800 uppercase" id="rule-modal-title">नया राउंड (New Round)</h3></div>
+            <div class="space-y-4">
+                <div><label class="block text-xs font-black text-slate-500 uppercase mb-1">राउंड का नाम (Round Name) *</label><input type="text" id="rule-name" class="w-full p-2 border rounded bg-slate-50 font-bold" placeholder="e.g. Round 1: सामान्य ज्ञान"></div>
+                <div><label class="block text-xs font-black text-slate-500 uppercase mb-1">प्रकार (Type) *</label>
+                    <select id="rule-type" onchange="updateRuleFields()" class="w-full p-2 border rounded bg-white font-bold">
+                        <option value="standard">सामान्य (Standard MCQ/Text)</option>
+                        <option value="rapid">रैपिड फायर (Rapid Fire)</option>
+                        <option value="hints">संकेत (Guessing with Hints)</option>
+                        <option value="buzzer">बज़र (Buzzer)</option>
+                        <option value="fastest">फास्टेस्ट फिंगर (Fastest Finger First)</option>
+                        <option value="order">क्रम व्यवस्था (Chronological / Order)</option>
+                        <option value="charades">मूक अभिनय (Dumb Charades)</option>
+                        <option value="tiebreaker">टाई-ब्रेकर (Tie Breaker)</option>
+                    </select>
+                </div>
+                <div><label class="block text-xs font-black text-slate-500 uppercase mb-1">नियमों का विवरण (Rules Description for Main Screen)</label><textarea id="rule-desc" class="w-full p-2 border rounded bg-slate-50 text-sm font-semibold h-24" placeholder="ऑटो-जेनरेट या मैनुअल टाइप करें..."></textarea></div>
+                <div id="rule-dynamic-fields" class="p-3 bg-slate-100 rounded-lg space-y-3 border border-slate-200"></div>
+                <div class="pt-4 flex gap-2">
+                    <button onclick="saveRoundRule()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-black uppercase text-sm shadow hover:bg-blue-700 active:scale-95 transition">सहेजें (Save)</button>
+                    <button onclick="closeModal('modal-round-rules')" class="py-3 px-4 bg-slate-200 text-slate-700 rounded-xl font-bold uppercase text-sm hover:bg-slate-300">रद्द</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-rapid-setup" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full">
+            <h3 class="text-xl font-black text-slate-800 mb-4 uppercase border-b pb-2"><i class="fa-solid fa-bolt text-red-500 mr-2"></i> रैपिड फायर सेटअप</h3>
+            <input type="hidden" id="rapid-setup-round-id">
+            <input type="hidden" id="rapid-setup-is-sample" value="false">
+            <p class="text-xs text-slate-500 font-bold mb-4" id="rapid-setup-desc">Select which team will receive the questions.</p>
+            <label class="block text-[10px] font-black text-slate-500 uppercase mb-1">टीम चुनें (Select Target)</label>
+            <select id="rapid-setup-target" class="w-full p-3 border-2 border-slate-200 rounded-xl font-bold bg-slate-50 mb-6 focus:border-red-500 outline-none">
+                <option value="all">सभी टीमें (All Teams)</option>
+            </select>
+            <div class="flex gap-2">
+                <button onclick="startRapidFireBatch()" id="rapid-setup-launch-btn" class="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-black uppercase text-sm shadow active:scale-95 transition">लॉन्च (Launch)</button>
+                <button onclick="closeModal('modal-rapid-setup')" class="py-3 px-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold uppercase text-sm transition">रद्द</button>
+            </div>
+        </div>
+
+        <div id="modal-csv-import" class="hidden bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full">
+            <h3 class="text-xl font-black text-slate-800 mb-4 uppercase border-b pb-2"><i class="fa-solid fa-file-csv text-blue-600 mr-2"></i> आयात (Import CSV)</h3>
+            <div class="mb-4">
+                <label class="block text-xs font-black text-slate-600 uppercase mb-1">लक्ष्य राउंड (Target Round) *</label>
+                <select id="csv-target-round" onchange="updateCSVTemplateSelect()" class="w-full p-2 border-2 border-slate-200 rounded-xl bg-slate-50 font-bold mb-2 outline-none focus:border-blue-500"></select>
+            </div>
+            <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-xl">
+                <label class="block text-[10px] font-black text-blue-800 uppercase mb-1">कस्टम टेम्पलेट डाउनलोड करें</label>
+                <div class="flex gap-2">
+                    <select id="csv-template-type" class="flex-grow p-2 text-xs font-bold rounded-lg border bg-white outline-none pointer-events-none">
+                        <option value="standard">Standard / FFF / Rapid Fire</option>
+                        <option value="hints">Hints Round Template</option>
+                        <option value="buzzer">Buzzer / Charades / Tie Template</option>
+                        <option value="order">Order/Chronology Template</option>
+                    </select>
+                    <button onclick="downloadCSVTemplate()" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-xs shadow-sm transition"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-xs font-black text-slate-600 uppercase mb-1">फ़ाइल चुनें (Select File) *</label>
+                <input type="file" id="csv-file" accept=".csv" class="w-full text-sm border-2 border-slate-200 p-2 rounded-xl bg-slate-50 cursor-pointer">
+            </div>
+            <div class="flex gap-2">
+                <button onclick="processCSV()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black uppercase text-sm shadow active:scale-95 transition">अपलोड करें</button>
+                <button onclick="closeModal('modal-csv-import')" class="py-3 px-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-bold uppercase text-sm transition">रद्द</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        window.quizData = { rounds: [], questions: [], teams: [], participants: [], state: {} };
+        window.myTeamId = null;
+        window.currentRole = 'landing';
+        window.editingRoundId = null;
+        window.expandedRounds = {};
+        window.confirmActionCb = null;
+        window.pendingAdminRole = null;
+        window.rapidAnswers = {};
+        window.currentOrderSelection = [];
+        window.lastSeenScoreEventId = null;
+        window.lastBuzzerWinner = null;
+        window.lastTickSec = null;
+        window.lastHintPts = null;
+        window.timeUpPlayed = false;
+        window.timeUpLocked = false;
+        window.pendingAllocationPreview = [];
+        window.clientTimerInterval = null;
+        
+        window.currentActiveQuestionId = null;
+        window.currentActiveRoundId = null;
+        
+        window.generateSafeId = () => { return Date.now().toString(36) + Math.random().toString(36).substring(2); };
+        
+        window.initAudioAndSetRole = async (role) => { try { await Tone.start(); playUnlockAudio(); } catch (e) {} window.setRole(role); };
+        window.initAudioAndRequestAdmin = async (role) => { try { await Tone.start(); playUnlockAudio(); } catch (e) {} window.requestAdminAccess(role); };
+
+        window.goHome = () => {
+            try { 
+                const url = new URL(window.location.href);
+                url.search = '';
+                window.history.pushState({}, '', url);
+            } catch(e) { console.log("Push state secured."); }
+            window.setRole('landing');
+        };
+
+        function playUnlockAudio() {
+            const bgm = document.getElementById('bgm-player');
+            if(bgm) { bgm.play().then(() => bgm.pause()).catch(e => console.log("Audio unlock issue: ", e)); }
+        }
+
+        window.setRole = (role) => {
+            window.currentRole = role;
+            document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
+            const header = document.getElementById('top-header');
+            const badge = document.getElementById('role-badge');
+            
+            if(role === 'landing' || role === 'team-register') {
+                document.getElementById(role === 'landing' ? 'view-landing' : 'view-team-register').classList.add('active-view');
+                header.classList.remove('hidden'); badge.classList.add('hidden');
+                
+                if(window.quizData.state && window.quizData.state.registrationOpen === false) {
+                    document.getElementById('reg-closed-banner').classList.remove('hidden');
+                } else {
+                    document.getElementById('reg-closed-banner').classList.add('hidden');
+                }
+
+            } else if(role === 'team') {
+                document.getElementById('view-team').classList.add('active-view');
+                header.classList.remove('hidden'); badge.classList.remove('hidden');
+                badge.textContent = "TEAM MODE";
+                if(typeof window.updateTeamUI === 'function') window.updateTeamUI();
+            } else if(role === 'organizer') {
+                document.getElementById('view-organizer').classList.add('active-view');
+                header.classList.remove('hidden'); badge.classList.remove('hidden');
+                badge.textContent = "ORGANIZER";
+                if(typeof window.renderOrgQuestions === 'function') { window.renderOrgQuestions(); window.renderOrgTeams(); window.updateLiveOrgPanel(); }
+            } else if(role === 'main-screen') {
+                document.getElementById('view-main-screen').classList.add('active-view');
+                header.classList.add('hidden');
+                if(typeof window.renderMainScreen === 'function') window.renderMainScreen();
+            }
+        };
+
+        window.openModal = (id) => { document.getElementById('modal-container').classList.remove('hidden'); document.getElementById(id).classList.remove('hidden'); };
+        window.closeModal = (id) => { document.getElementById(id).classList.add('hidden'); document.getElementById('modal-container').classList.add('hidden'); };
+        window.showAppAlert = (msg) => { document.getElementById('alert-msg').textContent = msg; window.openModal('modal-alert'); };
+        window.confirmAction = (msg, callback) => { document.getElementById('confirm-msg').textContent = msg; window.confirmActionCb = callback; window.openModal('modal-confirm'); };
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnYes = document.getElementById('confirm-btn-yes');
+            if(btnYes) {
+                btnYes.addEventListener('click', () => {
+                    if(window.confirmActionCb) window.confirmActionCb();
+                    window.closeModal('modal-confirm');
+                });
+            }
+        });
+
+        window.requestAdminAccess = (role) => {
+            if(sessionStorage.getItem('admin_pin_verified')) { window.setRole(role === 'main' ? 'main-screen' : 'organizer'); } 
+            else { window.pendingAdminRole = role; window.openModal('modal-admin-auth'); document.getElementById('input-admin-pin').value = ''; setTimeout(() => document.getElementById('input-admin-pin').focus(), 100); }
+        };
+        
+        window.verifyAdminPin = async () => {
+            const pin = document.getElementById('input-admin-pin').value;
+            let dbPin = "Enigma@1945"; 
+            try {
+                if(window.adminDocRef) {
+                    const snap = await getDoc(window.adminDocRef);
+                    if(snap.exists() && snap.data().pin) dbPin = snap.data().pin;
+                }
+            } catch(e) {}
+            if(pin === dbPin || pin === "Enigma@1945") {
+                sessionStorage.setItem('admin_pin_verified', 'true');
+                window.closeModal('modal-admin-auth');
+                window.setRole(window.pendingAdminRole === 'main' ? 'main-screen' : 'organizer');
+            } else { window.showAppAlert("गलत पिन! (Invalid PIN)"); }
+        };
+
+        window.toggleOrgTab = (tab) => {
+            const h = document.getElementById('org-tab-bg-highlight');
+            if(tab === 'qs') h.style.transform = 'translateX(0)'; else h.style.transform = 'translateX(100%)';
+            document.getElementById('tab-btn-qs').className = `flex-1 py-3 font-black uppercase text-xs transition-colors relative z-10 hover:bg-slate-100 ${tab==='qs'?'text-blue-700':'text-slate-500'}`;
+            document.getElementById('tab-btn-teams').className = `flex-1 py-3 font-bold uppercase text-xs transition-colors relative z-10 hover:bg-slate-100 ${tab==='teams'?'text-blue-700':'text-slate-500'}`;
+            document.getElementById('org-tab-qs').classList.toggle('hidden', tab !== 'qs');
+            document.getElementById('org-tab-teams').classList.toggle('hidden', tab !== 'teams');
+        };
+
+        window.toggleFullScreen = () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(e=>{}); else if (document.exitFullscreen) document.exitFullscreen(); };
+
+        window.playTone = (type) => {
+            try {
+                if(type === 'correct') { const synth = new Tone.PolySynth(Tone.Synth).toDestination(); synth.triggerAttackRelease(["C4", "E4", "G4"], "8n"); }
+                else if(type === 'wrong') { const synth = new Tone.Synth().toDestination(); synth.triggerAttackRelease("C2", "4n"); }
+                else if(type === 'buzzer') { const synth = new Tone.Synth({oscillator: {type: "sawtooth"}}).toDestination(); synth.triggerAttackRelease("A2", "8n"); }
+                else if(type === 'tick') { const synth = new Tone.MembraneSynth().toDestination(); synth.triggerAttackRelease("C2", "32n", "+0.05", 0.1); }
+                else if(type === 'timeup') { const synth = new Tone.Synth({oscillator: {type: "square"}}).toDestination(); synth.triggerAttackRelease("C3", "2n"); }
+            } catch(e){}
+        };
+
+        const appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'pakhwada-quiz-2026';
+        let configToUse = { apiKey: "AIzaSyCa8XbdZayPaxQ8iF8GLaHgwcFeY1K_uYc",
+  authDomain: "pakhwada-quiz-2026.firebaseapp.com",
+  projectId: "pakhwada-quiz-2026",
+  storageBucket: "pakhwada-quiz-2026.firebasestorage.app",
+  messagingSenderId: "256566098463",
+  appId: "1:256566098463:web:05f4f3ffe5ff6e6bc8f32a"};
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+        
+        if(typeof window.__firebase_config !== 'undefined') {
+            try { configToUse = typeof window.__firebase_config === 'string' ? JSON.parse(window.__firebase_config) : window.__firebase_config; } catch(e){}
+        } else if (typeof __firebase_config !== 'undefined') {
+            try { configToUse = typeof __firebase_config === 'string' ? JSON.parse(__firebase_config) : __firebase_config; } catch(e){}
+        }
+
+        let app, db, auth;
+        try {
+            app = initializeApp(configToUse);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            const basePath = `artifacts/${appId}/public/data`; 
+            window.adminDocRef = doc(db, `${basePath}/system_settings`, 'admin');
+            window.stateDocRef = doc(db, `${basePath}/system_settings`, 'game_state');
+            window.teamsColl = collection(db, `${basePath}/teams`);
+            window.roundsColl = collection(db, `${basePath}/rounds`);
+            window.questionsColl = collection(db, `${basePath}/questions`);
+            window.participantsColl = collection(db, `${basePath}/participants`);
+        } catch (initError) { console.error("Firebase Boot Error:", initError); }
+
+        function showDbError(err) {
+            console.error("Firestore Error:", err);
+            if(err.code === 'permission-denied') { console.log("Database access denied."); }
+        }
+
+        async function initApp() {
+            if(!auth) return;
+            try {
+                if (typeof window.__initial_auth_token !== 'undefined') { await signInWithCustomToken(auth, window.__initial_auth_token); } 
+                else { await signInAnonymously(auth); }
+
+                onAuthStateChanged(auth, async (user) => {
+                    if (user) {
+                        try { 
+                            const stateSnap = await getDoc(window.stateDocRef);
+                            if(!stateSnap.exists()) {
+                                await setDoc(window.stateDocRef, { status: 'waiting', activeRoundId: null, activeQuestionId: null, showQR: false, teamAnswers: {}, registrationOpen: true, bgm: { playing: false, volume: 0.5 } });
+                                await setDoc(window.adminDocRef, { pin: "Enigma@1945" });
+                            }
+                        } catch (err) { showDbError(err); return; }
+
+                        setupListeners();
+                        setupConnectionTracking();
+                        
+                        const urlParams = new URLSearchParams(window.location.search);
+                        if(urlParams.get('role') === 'main' && sessionStorage.getItem('admin_pin_verified')) { window.setRole('main-screen'); } 
+                        else if(urlParams.get('role') === 'team' && sessionStorage.getItem('team_id')) { window.myTeamId = sessionStorage.getItem('team_id'); window.setRole('team'); } 
+                        else { window.setRole('landing'); }
+
+                        setTimeout(() => {
+                            if(typeof QRious !== 'undefined') {
+                                const joinUrl = window.location.origin + window.location.pathname + '?role=team';
+                                new QRious({ element: document.getElementById('qr-canvas-projector'), value: joinUrl, size: 250, background: 'white', foreground: 'black' });
+                            }
+                        }, 500);
+                    }
+                });
+            } catch (e) { showDbError({code: 'permission-denied'}); }
+        }
+
+        function setupConnectionTracking() {
+            window.addEventListener('visibilitychange', () => {
+                if(window.myTeamId) {
+                    try { updateDoc(doc(db, window.teamsColl.path, window.myTeamId), { isOnline: document.visibilityState === 'visible' }); } catch(e){}
+                }
+            });
+            window.addEventListener('pagehide', () => {
+                if(window.myTeamId) {
+                     try { updateDoc(doc(db, window.teamsColl.path, window.myTeamId), { isOnline: false }); } catch(e){}
+                }
+            });
+        }
+
+        initApp();
+
+        function setupListeners() {
+            if(!db) return;
+            onSnapshot(window.stateDocRef, (docSnap) => {
+                if(docSnap.exists()) { window.quizData.state = docSnap.data(); handleStateChange(window.quizData.state); }
+            }, (error) => { showDbError(error); });
+
+            onSnapshot(window.teamsColl, (snapshot) => {
+                window.quizData.teams = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
+                if(window.currentRole === 'organizer') window.renderOrgTeams();
+                if(window.currentRole === 'team' && window.myTeamId) window.updateTeamUI();
+                if(window.currentRole === 'main-screen') { window.renderSidebarLeaderboard(); window.renderMainScreen(); }
+                
+                const recSel = document.getElementById('rec-tname');
+                if(recSel) { recSel.innerHTML = '<option value="">टीम चुनें (Select...)</option>' + window.quizData.teams.map(t => `<option value="${t.id}">${t.name}</option>`).join(''); }
+            }, (error) => { showDbError(error); });
+
+            onSnapshot(window.roundsColl, (snapshot) => {
+                window.quizData.rounds = snapshot.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => a.order - b.order);
+                if(window.currentRole === 'organizer') window.renderOrgQuestions();
+                const csvTarget = document.getElementById('csv-target-round');
+                if(csvTarget) { csvTarget.innerHTML = '<option value="">राउंड चुनें...</option>' + window.quizData.rounds.map(r => `<option value="${r.id}">${r.name} (${r.type})</option>`).join(''); }
+            }, (error) => { showDbError(error); });
+
+            onSnapshot(window.questionsColl, (snapshot) => {
+                window.quizData.questions = snapshot.docs.map(d => ({id: d.id, ...d.data()})).sort((a,b) => a.order - b.order);
+                if(window.currentRole === 'organizer') window.renderOrgQuestions();
+            }, (error) => { showDbError(error); });
+
+            onSnapshot(window.participantsColl, (snapshot) => {
+                window.quizData.participants = snapshot.docs.map(d => ({id: d.id, ...d.data()}));
+                if(window.currentRole === 'organizer') window.renderOrgPoolList();
+                if(window.currentRole === 'main-screen') { window.renderSidebarLeaderboard(); window.renderMainScreen(); }
+            }, (error) => { showDbError(error); });
+        }
+
+        window.toggleBGM = async () => {
+            const current = window.quizData.state.bgm?.playing;
+            try { await setDoc(window.stateDocRef, { bgm: { playing: !current, volume: window.quizData.state.bgm?.volume || 0.5 } }, {merge: true}); } catch(e){}
+        };
+        window.updateBGMVolume = async () => {
+            const vol = parseFloat(document.getElementById('bgm-vol-slider').value);
+            try { await setDoc(window.stateDocRef, { bgm: { playing: window.quizData.state.bgm?.playing || false, volume: vol } }, {merge: true}); } catch(e){}
+        };
+
+        window.toggleRegistration = async () => {
+            const currentStatus = window.quizData.state.registrationOpen !== false;
+            try { await updateDoc(window.stateDocRef, { registrationOpen: !currentStatus }); } catch(e) {}
+        };
+
+        window.orgAddParticipant = async () => {
+            const nameInput = document.getElementById('org-pool-add-name');
+            const name = nameInput.value.trim();
+            if(!name) return;
+            try {
+                await setDoc(doc(window.participantsColl), { name, timestamp: Date.now() });
+                nameInput.value = '';
+            } catch(e) { window.showAppAlert("Error adding participant."); }
+        };
+
+        window.orgDeleteParticipant = async (pid) => {
+            try { await deleteDoc(doc(db, window.participantsColl.path, pid)); } catch(e) {}
+        };
+
+        window.renderOrgPoolList = () => {
+            const container = document.getElementById('org-pool-list-container');
+            if(!container) return;
+            const parts = window.quizData.participants || [];
+            if(parts.length === 0) { container.innerHTML = '<p class="text-xs text-slate-400 font-bold text-center mt-4">पूल खाली है (Pool is empty)</p>'; return; }
+            container.innerHTML = parts.map(p => `
+                <div class="flex justify-between items-center bg-white p-2 border border-slate-100 rounded-lg mb-1 shadow-sm">
+                    <span class="text-sm font-bold text-slate-700">${p.name}</span>
+                    <button onclick="orgDeleteParticipant('${p.id}')" class="text-red-400 hover:text-red-600 px-2 py-1 bg-red-50 rounded transition"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `).join('');
+        };
+
+        window.orgSaveNewTeam = async () => {
+            const name = document.getElementById('add-team-name').value.trim();
+            const pin = document.getElementById('add-team-pin').value.trim();
+            const score = parseInt(document.getElementById('add-team-score').value) || 0;
+            const members = document.getElementById('add-team-members').value.split(',').map(m=>m.trim()).filter(Boolean);
+            
+            if(!name || !pin || members.length < 3) return window.showAppAlert("कृपया टीम का नाम, पिन, और कम से कम 3 सदस्यों के नाम दर्ज करें (कॉमा द्वारा अलग किए गए)।");
+            if(window.quizData.teams.some(t => t.name.toLowerCase() === name.toLowerCase())) return window.showAppAlert("Team name already exists!");
+            
+            try {
+                const newTeamRef = doc(window.teamsColl);
+                await setDoc(newTeamRef, { name, pin, members, score, isOnline: false, joinedAt: Date.now() });
+                window.closeModal('modal-org-add-team');
+                document.getElementById('add-team-name').value = '';
+                document.getElementById('add-team-pin').value = '';
+                document.getElementById('add-team-members').value = '';
+            } catch(e) { window.showAppAlert("Error creating team."); }
+        };
+
+        window.deleteTeam = async (tid) => { try { await deleteDoc(doc(db, window.teamsColl.path, tid)); } catch(e) {} };
+
+        window.handleTeamReconnect = async (e) => {
+            e.preventDefault();
+            const tid = document.getElementById('rec-tname').value;
+            const pin = document.getElementById('rec-tsecret').value;
+            const team = window.quizData.teams.find(t => t.id === tid);
+            if(team && team.pin === pin) {
+                window.myTeamId = tid;
+                sessionStorage.setItem('team_id', window.myTeamId);
+                try { await updateDoc(doc(db, window.teamsColl.path, tid), { isOnline: true }); } catch(e) {}
+                window.setRole('team');
+            } else { window.showAppAlert("गलत पिन! (Invalid PIN)"); }
+        };
+        
+        window.clearParticipantPool = async () => {
+            if(!confirm("क्या आप सभी पंजीकृत प्रतिभागियों को हटाना चाहते हैं?")) return;
+            try {
+                const batch = writeBatch(db);
+                window.quizData.participants.forEach(p => batch.delete(doc(db, window.participantsColl.path, p.id)));
+                await batch.commit();
+            } catch(e) {}
+        };
+
+        window.generateRandomTeamsPreview = () => {
+            const parts = window.quizData.participants || [];
+            if(parts.length === 0) return window.showAppAlert("कोई प्रतिभागी नहीं है! (No participants in pool)");
+            
+            const names = parts.map(p => p.name);
+            const size = parseInt(document.getElementById('rt-size').value);
+            
+            for (let i = names.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [names[i], names[j]] = [names[j], names[i]]; }
+            
+            const teams = [];
+            for(let i=0; i<names.length; i+=size) teams.push(names.slice(i, i+size));
+            
+            const solarSystemNames = ['सूर्य', 'बुध', 'शुक्र', 'पृथ्वी', 'मंगल', 'बृहस्पति', 'शनि', 'अरुण', 'वरुण'];
+            
+            window.pendingAllocationPreview = teams.map((members, i) => ({ 
+                name: solarSystemNames[i % solarSystemNames.length] || `टीम ${i+1}`, 
+                members 
+            }));
+
+            const container = document.getElementById('rt-preview-container');
+            container.innerHTML = window.pendingAllocationPreview.map((t, idx) => `
+                <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+                    <label class="block text-[10px] font-black text-slate-500 uppercase mb-1">टीम ${idx+1} का नाम</label>
+                    <input type="text" id="rt-preview-name-${idx}" value="${t.name}" class="w-full p-2 border rounded font-bold text-sm mb-2">
+                    <p class="text-[10px] text-slate-500 font-bold">${t.members.join(', ')}</p>
+                </div>
+            `).join('');
+            
+            document.getElementById('rt-preview-container').classList.remove('hidden');
+            document.getElementById('rt-action-btns').classList.add('hidden');
+            document.getElementById('rt-confirm-btns').classList.remove('hidden');
+        };
+
+        window.cancelPreview = () => {
+            document.getElementById('rt-preview-container').classList.add('hidden');
+            document.getElementById('rt-action-btns').classList.remove('hidden');
+            document.getElementById('rt-confirm-btns').classList.add('hidden');
+        };
+
+        window.confirmProjectTeams = async () => {
+            try {
+                const batch = writeBatch(db);
+                const projectedTeams = [];
+                
+                window.pendingAllocationPreview.forEach((t, i) => {
+                    const customName = document.getElementById(`rt-preview-name-${i}`)?.value || t.name;
+                    const pin = Math.floor(1000 + Math.random() * 9000).toString(); 
+                    const newTeamRef = doc(window.teamsColl);
+                    batch.set(newTeamRef, {
+                        name: customName, pin: pin, members: t.members, score: 0, isOnline: false, joinedAt: Date.now()
+                    });
+                    projectedTeams.push({ name: customName, pin: pin, members: t.members });
+                });
+                
+                window.quizData.participants.forEach(p => batch.delete(doc(db, window.participantsColl.path, p.id)));
+                await batch.commit();
+
+                await updateDoc(window.stateDocRef, { status: 'allocation', teamAllocation: projectedTeams });
+                window.closeModal('modal-random-teams');
+            } catch(e) { window.showAppAlert("Error creating teams!"); }
+        };
+
+        window.openRoundRulesModal = (roundId = null) => {
+            document.getElementById('rule-name').value = '';
+            document.getElementById('rule-desc').value = '';
+            document.getElementById('rule-type').value = 'standard';
+            window.editingRoundId = roundId;
+            
+            if(roundId) {
+                const r = window.quizData.rounds.find(x => x.id === roundId);
+                if(r) {
+                    document.getElementById('rule-name').value = r.name;
+                    document.getElementById('rule-desc').value = r.desc || '';
+                    document.getElementById('rule-type').value = r.type;
+                    window.updateRuleFields(r.rules);
+                    document.getElementById('rule-modal-title').textContent = "राउंड संपादित करें (Edit Round)";
+                }
+            } else {
+                window.updateRuleFields();
+                document.getElementById('rule-modal-title').textContent = "नया राउंड (New Round)";
+            }
+            window.openModal('modal-round-rules');
+        };
+
+        window.updateRuleFields = (existingRules = null) => {
+            const type = document.getElementById('rule-type').value;
+            const container = document.getElementById('rule-dynamic-fields');
+            const desc = document.getElementById('rule-desc');
+            let html = '';
+
+            let defPts=10, defNeg=0, defTime=30; 
+            if(type==='rapid') { defPts=10; defNeg=-5; defTime=120; }
+            else if(type==='fastest') { defPts=10; defNeg=0; defTime=20; }
+            else if(type==='order') { defPts=10; defNeg=0; defTime=20; }
+            else if(type==='charades') { defPts=10; defNeg=0; defTime=60; }
+            else if(type==='buzzer'||type==='tiebreaker') { defPts=10; defNeg=-5; defTime=30; }
+
+            if(!desc.value && !window.editingRoundId) {
+                if(type === 'standard') desc.value = "प्रत्येक सही उत्तर के लिए 10 अंक दिए जाएंगे।";
+                else if(type === 'rapid') desc.value = "120 सेकंड में अधिकतम 10 प्रश्नों के उत्तर दें। सही पर +10, गलत पर -5, अनुत्तरित पर 0।";
+                else if(type === 'hints') desc.value = "संकेतों के आधार पर उत्तर पहचानें (40 सेकंड)। 0 संकेत: 20 अंक | 1 संकेत: 15 अंक | 2 संकेत: 10 अंक | 3 संकेत: 5 अंक। गलत/अनुत्तरित: -10।";
+                else if(type === 'buzzer') desc.value = "बज़र राउंड (30 सेकंड): सही पर +10, गलत या बज़र के बाद अनुत्तरित पर -5।";
+                else if(type === 'fastest') desc.value = "फास्टेस्ट फिंगर (20 सेकंड): जो टीम सबसे पहले सही उत्तर लॉक करेगी, उसे +10 अंक मिलेंगे। गलत पर 0।";
+                else if(type === 'order') desc.value = "क्रम व्यवस्था (20 सेकंड): दिए गए 4 विकल्पों को सही कालानुक्रम में व्यवस्थित करें। सही पर +10, गलत पर 0।";
+                else if(type === 'charades') desc.value = "मूक अभिनय (60 सेकंड): टीम का एक सदस्य दिए गए मुहावरे का बिना बोले अभिनय करेगा। सही पर +10, गलत पर 0।";
+                else if(type === 'tiebreaker') desc.value = "टाई-ब्रेकर बज़र (30 सेकंड): सही पर +10, गलत/अनुत्तरित पर -5।";
+            }
+
+            if(type === 'standard' || type === 'fastest' || type === 'order' || type === 'rapid' || type === 'buzzer' || type === 'charades' || type === 'tiebreaker') {
+                html = `
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <div><label class="block text-[10px] font-black text-slate-500 uppercase">सही उत्तर (Correct Pts)</label><input type="number" id="rule-pts" value="${existingRules?.pts !== undefined ? existingRules.pts : defPts}" class="w-full p-2 border rounded font-bold"></div>
+                        <div><label class="block text-[10px] font-black text-slate-500 uppercase">गलत उत्तर (Wrong Pts)</label><input type="number" id="rule-neg" value="${existingRules?.neg !== undefined ? existingRules.neg : defNeg}" class="w-full p-2 border rounded font-bold text-red-600"></div>
+                    </div>
+                    <div><label class="block text-[10px] font-black text-slate-500 uppercase">समय (Time in sec)</label><input type="number" id="rule-time" value="${existingRules?.time !== undefined ? existingRules.time : defTime}" class="w-full p-2 border rounded font-bold"></div>
+                `;
+            } else if (type === 'hints') {
+                html = `
+                    <div class="grid grid-cols-2 gap-2 mb-2">
+                        <div><label class="block text-[10px] font-black text-slate-500 uppercase">गलत/अनुत्तरित (Wrong Pts)</label><input type="number" id="rule-neg" value="${existingRules?.neg !== undefined ? existingRules.neg : -10}" class="w-full p-2 border rounded font-bold text-red-600"></div>
+                        <div><label class="block text-[10px] font-black text-slate-500 uppercase">कुल समय (Total Time)</label><input type="number" id="rule-time" value="${existingRules?.time !== undefined ? existingRules.time : 40}" class="w-full p-2 border rounded font-bold"></div>
+                    </div>
+                    <div><label class="block text-[10px] font-black text-slate-500 uppercase">स्वत: संकेत समय (Auto Time)</label><input type="number" id="rule-auto-time" value="${existingRules?.autoTime !== undefined ? existingRules.autoTime : 10}" class="w-full p-2 border rounded font-bold"></div>
+                    <div class="mt-3 p-2 bg-white rounded border border-blue-200 text-xs shadow-inner">
+                        <strong class="text-blue-800 uppercase block mb-1">स्कोरिंग पूर्वावलोकन (Preview):</strong>
+                        <div id="hint-preview-box" class="font-mono font-bold text-slate-600 space-y-1">
+                            <div class="flex justify-between"><span>बिना संकेत (0 Hints):</span> <span class="text-emerald-600">+20</span></div>
+                            <div class="flex justify-between"><span>संकेत 1 (1 Hint):</span> <span class="text-emerald-600">+15</span></div>
+                            <div class="flex justify-between"><span>संकेत 2 (2 Hints):</span> <span class="text-emerald-600">+10</span></div>
+                            <div class="flex justify-between"><span>संकेत 3 (3 Hints):</span> <span class="text-emerald-600">+5</span></div>
+                        </div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        };
+
+        window.saveRoundRule = async () => {
+            const name = document.getElementById('rule-name').value.trim();
+            const desc = document.getElementById('rule-desc').value.trim();
+            const type = document.getElementById('rule-type').value;
+            if(!name) return window.showAppAlert("नाम आवश्यक है");
+
+            let rules = {};
+            if(['standard', 'fastest', 'order', 'rapid', 'buzzer', 'charades', 'tiebreaker'].includes(type)) {
+                let negVal = document.getElementById('rule-neg').value;
+                rules = { 
+                    pts: parseInt(document.getElementById('rule-pts').value) || 0, 
+                    neg: negVal !== "" ? -Math.abs(parseInt(negVal)) : (['buzzer', 'tiebreaker', 'rapid'].includes(type) ? -5 : 0), 
+                    time: parseInt(document.getElementById('rule-time').value) || 0 
+                };
+            } else if(type === 'hints') {
+                let negVal = document.getElementById('rule-neg').value;
+                rules = { 
+                    neg: negVal !== "" ? -Math.abs(parseInt(negVal)) : -10,
+                    time: parseInt(document.getElementById('rule-time').value) || 40,
+                    autoTime: parseInt(document.getElementById('rule-auto-time').value) || 10 
+                };
+            }
+
+            try {
+                if(window.editingRoundId) await updateDoc(doc(db, window.roundsColl.path, window.editingRoundId), { name, desc, type, rules });
+                else await setDoc(doc(window.roundsColl), { name, desc, type, rules, order: Date.now() });
+                window.closeModal('modal-round-rules');
+            } catch(e) {}
+        };
+
+        window.deleteRoundAndQuestions = async (roundId) => {
+            try {
+                const batch = writeBatch(db);
+                batch.delete(doc(db, window.roundsColl.path, roundId));
+                window.quizData.questions.filter(q => q.roundId === roundId).forEach(q => batch.delete(doc(db, window.questionsColl.path, q.id)));
+                await batch.commit();
+            } catch(e) {}
+        };
+        window.deleteQuiz = async () => {
+            try {
+                const batch = writeBatch(db);
+                window.quizData.rounds.forEach(r => batch.delete(doc(db, window.roundsColl.path, r.id)));
+                window.quizData.questions.forEach(q => batch.delete(doc(db, window.questionsColl.path, q.id)));
+                await batch.commit();
+                window.showAppAlert("Prashnotri Deleted.");
+            } catch(e) {}
+        };
+        window.deleteQuestion = async (qId) => { try { await deleteDoc(doc(db, window.questionsColl.path, qId)); } catch(e) {} };
+        window.toggleSampleStatus = async (qId, status) => { try { await updateDoc(doc(db, window.questionsColl.path, qId), { isSample: status }); } catch(e) {} };
+
+        window.updateCSVTemplateSelect = () => {
+            const rId = document.getElementById('csv-target-round').value;
+            const r = window.quizData.rounds.find(x => x.id === rId);
+            const sel = document.getElementById('csv-template-type');
+            if(!r) return;
+            if(r.type === 'hints') sel.value = 'hints';
+            else if(r.type === 'buzzer' || r.type === 'charades' || r.type === 'tiebreaker') sel.value = 'buzzer';
+            else if(r.type === 'order') sel.value = 'order';
+            else sel.value = 'standard';
+        };
+
+        window.downloadCSVTemplate = () => {
+            const type = document.getElementById('csv-template-type').value;
+            let csvContent = '\uFEFF'; 
+            if(type === 'standard') csvContent += "Question,ImageURL,OptionA,OptionB,OptionC,OptionD,CorrectAnswer,Sample(Yes/No)\nभारत की राजधानी क्या है?,,मुंबई,नई दिल्ली,कोलकाता,चेन्नई,नई दिल्ली,No\n";
+            else if (type === 'hints') csvContent += "Question,ImageURL,Hint1,Hint2,Hint3,CorrectAnswer,Sample(Yes/No)\nमैं एक फल हूँ,,मैं पीला हूँ,बंदर मुझे पसंद करते हैं,मैं लंबा हूँ,केला,No\n";
+            else if (type === 'buzzer') csvContent += "Question,ImageURL,Sample(Yes/No)\nताजमहल कहाँ स्थित है?,,No\n";
+            else if (type === 'order') csvContent += "Question,ImageURL,Event1(Earliest),Event2,Event3,Event4(Latest),Sample(Yes/No)\nइन घटनाओं को सही क्रम में लगाएं,,प्रथम विश्व युद्ध,भारत छोड़ो आंदोलन,भारत की आज़ादी,संविधान लागू होना,No\n";
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `Template_${type}.csv`;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        };
+
+        window.processCSV = () => {
+            const roundId = document.getElementById('csv-target-round').value;
+            const file = document.getElementById('csv-file').files[0];
+            if(!roundId || !file) return window.showAppAlert("Select a round and a file!");
+            const rType = window.quizData.rounds.find(r=>r.id===roundId)?.type;
+
+            Papa.parse(file, {
+                header: true, skipEmptyLines: true,
+                complete: async function(results) {
+                    try {
+                        const batch = writeBatch(db);
+                        results.data.forEach((row, i) => {
+                            const cleanRow = {}; for(let key in row) cleanRow[key.trim()] = row[key].trim();
+                            if(!cleanRow.Question) return; 
+
+                            let qData = { roundId, text: cleanRow.Question, imageUrl: cleanRow.ImageURL || '', isSample: (cleanRow['Sample(Yes/No)']?.toLowerCase()==='yes'), order: Date.now() + i, asked: false };
+                            
+                            if(rType === 'hints') { qData.hints = [cleanRow.Hint1, cleanRow.Hint2, cleanRow.Hint3].filter(Boolean); qData.answer = cleanRow.CorrectAnswer || ''; }
+                            else if(rType === 'order') { qData.options = [cleanRow['Event1(Earliest)'], cleanRow.Event2, cleanRow.Event3, cleanRow['Event4(Latest)']].filter(Boolean); qData.answer = 'order'; }
+                            else if(['buzzer', 'charades', 'tiebreaker'].includes(rType)) { qData.answer = cleanRow.CorrectAnswer || ''; }
+                            else if(cleanRow.OptionA) { qData.options = [cleanRow.OptionA, cleanRow.OptionB, cleanRow.OptionC, cleanRow.OptionD].filter(Boolean); qData.answer = cleanRow.CorrectAnswer || ''; }
+                            
+                            batch.set(doc(window.questionsColl), qData);
+                        });
+                        await batch.commit();
+                        window.closeModal('modal-csv-import');
+                        window.showAppAlert("आयात सफल! (Import Success)");
+                        document.getElementById('csv-file').value = '';
+                    } catch(e) { window.showAppAlert("Error uploading questions."); }
+                }
+            });
+        };
+
+        window.launchRoundRules = async (roundId) => {
+            try { 
+                await updateDoc(window.stateDocRef, { status: 'loading-question', activeQuestionId: null, timerStoppedAt: null, teamAnswers: {}, buzzerWinner: null, buzzerTime: null });
+                setTimeout(async () => {
+                    await updateDoc(window.stateDocRef, { status: 'round-intro', activeRoundId: roundId, activeQuestionId: null, startTime: null, timerStoppedAt: null, teamAnswers: {} }); 
+                }, 1500);
+            } catch(e){}
+        };
+
+        window.renderOrgQuestions = () => {
+            const container = document.getElementById('org-rounds-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            window.quizData.rounds.forEach(round => {
+                const qs = window.quizData.questions.filter(q => q.roundId === round.id);
+                const isExp = window.expandedRounds[round.id] !== false; 
+                const hasSamples = qs.some(q => q.isSample);
+                
+                let roundHtml = `
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-3 transition-all">
+                        <div class="bg-slate-800 p-3 flex justify-between items-center text-white cursor-pointer select-none" onclick="toggleRoundExp('${round.id}')">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-chevron-${isExp?'down':'right'} text-slate-400 text-xs w-4"></i>
+                                <span class="font-black uppercase text-sm">${round.name}</span>
+                                <span class="text-[10px] bg-slate-700 px-2 rounded-full uppercase tracking-wider">${round.type}</span>
+                            </div>
+                            <div class="flex gap-2" onclick="event.stopPropagation()">
+                                ${round.type === 'rapid' ? `
+                                    ${hasSamples ? `<button onclick="openRapidSetupModal('${round.id}', true)" class="px-2 py-1 bg-orange-600 hover:bg-orange-500 rounded text-[10px] font-black shadow-lg active:scale-95 text-white">प्रैक्टिस (Sample)</button>` : ''}
+                                    <button onclick="openRapidSetupModal('${round.id}', false)" class="px-2 py-1 bg-red-600 hover:bg-red-500 rounded text-[10px] font-black shadow-lg active:scale-95 text-white"><i class="fa-solid fa-bolt"></i> रैपिड लॉन्च</button>
+                                ` : ''}
+                                <button onclick="launchRoundRules('${round.id}')" class="px-2 py-1 bg-teal-600 hover:bg-teal-500 rounded text-[10px] active:scale-95 text-white shadow font-black"><i class="fa-solid fa-bullhorn"></i> नियम</button>
+                                <button onclick="openRoundRulesModal('${round.id}')" class="px-2 py-1 bg-slate-600 hover:bg-slate-500 rounded text-[10px] active:scale-95"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="confirmAction('क्या आप इस राउंड और इसके सभी प्रश्नों को हटाना चाहते हैं?', () => window.deleteRoundAndQuestions('${round.id}'))" class="px-2 py-1 bg-red-600 hover:bg-red-500 rounded text-[10px] active:scale-95"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="${isExp?'':'hidden'} p-2 space-y-1 bg-slate-50">
+                `;
+                
+                if (round.type === 'charades') {
+                    roundHtml += `
+                        <div class="p-2 bg-purple-100 border-b border-purple-200 flex items-center justify-between mb-2 rounded">
+                            <span class="text-[10px] font-black text-purple-800 uppercase">1. Select Team First:</span>
+                            <select id="charades-pre-team-${round.id}" class="p-1.5 rounded text-xs font-bold border border-purple-300 w-1/2 outline-none focus:border-purple-500">
+                                <option value="">-- Choose Team --</option>
+                                ${window.quizData.teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                }
+                
+                if(qs.length === 0) roundHtml += `<div class="p-4 text-center text-xs font-bold text-slate-400 uppercase border-2 border-dashed border-slate-200 rounded-lg">Empty / No Questions</div>`;
+                else {
+                    const isCharades = round.type === 'charades';
+                    qs.forEach((q, i) => {
+                        const isActive = window.quizData.state.activeQuestionId === q.id;
+                        const displayTitle = isCharades ? `पर्ची (Slip) #${i+1}` : q.text;
+                        roundHtml += `
+                            <div class="flex justify-between items-center p-2 rounded border ${isActive ? 'bg-blue-100 border-blue-300' : 'bg-white border-slate-200'} ${q.asked ? 'opacity-60' : ''}">
+                                <div class="flex-grow pr-2">
+                                    <p class="text-sm font-bold text-slate-800 line-clamp-1">${displayTitle}</p>
+                                    <div class="flex gap-1 mt-1">
+                                        ${q.isSample ? '<span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-black uppercase tracking-widest shadow-sm border border-red-200">नमूना (Sample)</span>' : ''}
+                                        ${q.asked ? '<span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">Asked</span>' : ''}
+                                    </div>
+                                </div>
+                                <div class="flex gap-1 shrink-0 items-center">
+                                    <button onclick="launchQuestion('${q.id}')" class="px-3 py-1.5 ${q.asked ? 'bg-slate-500' : 'bg-emerald-600'} hover:bg-emerald-500 text-white rounded text-[10px] font-black shadow-md active:scale-95"><i class="fa-solid fa-play mr-1"></i> ${q.asked ? 'पूछा गया' : 'लॉन्च'}</button>
+                                    <button onclick="toggleSampleStatus('${q.id}', ${!q.isSample})" class="px-2 py-1 rounded text-[10px] font-black border ${q.isSample ? 'bg-red-500 text-white border-red-600' : 'bg-slate-200 text-slate-500 border-slate-300 hover:bg-slate-300'} active:scale-95" title="Toggle Sample">SAMP</button>
+                                    <button onclick="confirmAction('Delete Question?', () => window.deleteQuestion('${q.id}'))" class="px-2 py-1 rounded bg-slate-200 hover:bg-red-100 text-slate-500 hover:text-red-600 active:scale-95"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                roundHtml += `</div></div>`;
+                container.innerHTML += roundHtml;
+            });
+        };
+
+        window.toggleRoundExp = (id) => { window.expandedRounds[id] = window.expandedRounds[id] === false ? true : false; window.renderOrgQuestions(); };
+
+        window.renderOrgTeams = () => {
+            const container = document.getElementById('org-teams-list');
+            document.getElementById('team-count-badge').textContent = window.quizData.teams.length;
+            if(!container) return;
+            
+            const scoreSel = document.getElementById('org-score-team');
+            let selHtml = '<option value="">टीम चुनें...</option>';
+            let sortedTeams = [...window.quizData.teams].sort((a,b)=>b.score-a.score);
+
+            container.innerHTML = sortedTeams.map((t) => {
+                selHtml += `<option value="${t.id}">${t.name} (${t.score} pts)</option>`;
+                return `
+                <div class="p-3 bg-white border rounded-xl shadow-sm flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full ${t.isOnline?'bg-green-500':'bg-red-500'} shadow-sm" title="${t.isOnline?'Online':'Offline'}"></span>
+                            <span class="font-black text-slate-800">${t.name} <span class="text-[10px] text-white ml-2 bg-emerald-500 px-2 py-0.5 rounded-full font-black shadow-sm">PIN: ${t.pin}</span></span>
+                        </div>
+                        <div class="text-[10px] text-slate-500 font-bold uppercase mt-1 line-clamp-1">${t.members?.join(', ')}</div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <div class="text-xl font-black text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100 mr-2">${t.score}</div>
+                        <button onclick="openEditTeamModal('${t.id}')" class="px-2 py-1.5 bg-slate-100 text-slate-500 rounded hover:bg-slate-200 active:scale-95 transition"><i class="fa-solid fa-pen text-xs"></i></button>
+                        <button onclick="confirmAction('क्या आप इस टीम को हटाना चाहते हैं?', () => window.deleteTeam('${t.id}'))" class="px-2 py-1.5 bg-red-50 text-red-500 rounded hover:bg-red-100 active:scale-95 transition"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                </div>
+            `}).join('');
+            
+            if(scoreSel) scoreSel.innerHTML = selHtml;
+        };
+
+        window.openEditTeamModal = (tid) => {
+            const t = window.quizData.teams.find(x=>x.id===tid);
+            if(!t) return;
+            document.getElementById('edit-team-id').value = tid;
+            document.getElementById('edit-team-name').value = t.name;
+            document.getElementById('edit-team-score').value = t.score;
+            document.getElementById('edit-team-members').value = t.members.join(', ');
+            window.openModal('modal-edit-team');
+        }
+        window.saveTeamEdit = async () => {
+            const tid = document.getElementById('edit-team-id').value;
+            const name = document.getElementById('edit-team-name').value.trim();
+            const score = parseInt(document.getElementById('edit-team-score').value);
+            const members = document.getElementById('edit-team-members').value.split(',').map(m=>m.trim()).filter(Boolean);
+            try { await updateDoc(doc(db, window.teamsColl.path, tid), { name, score, members }); window.closeModal('modal-edit-team'); } catch(e) {}
+        }
+
+        window.toggleLiveQR = async () => { try { await updateDoc(window.stateDocRef, { showQR: !window.quizData.state.showQR }); } catch(e) {} };
+        window.setMainScreenState = async (status) => { try { await updateDoc(window.stateDocRef, { status: status, activeQuestionId: null, teamAnswers: {}, buzzerWinner: null, buzzerTime: null, timerStoppedAt: null }); } catch(e) {} };
+        window.showRoundLeaderboard = async () => { try { await updateDoc(window.stateDocRef, { status: 'round-leaderboard', activeQuestionId: null }); } catch(e) {} };
+        window.showQuestionResult = async () => { try { await updateDoc(window.stateDocRef, { status: 'question-result', timerStoppedAt: Date.now() }); } catch(e) {} };
+        window.endQuizFinal = async () => { try { await updateDoc(window.stateDocRef, { status: 'final-leaderboard', activeQuestionId: null }); } catch(e) {} };
+        
+        window.awardPoints = async (teamId, points) => {
+            const t = window.quizData.teams.find(x => x.id === teamId);
+            if(!t) return;
+            try {
+                const newScore = (t.score || 0) + points;
+                const batchId = window.generateSafeId();
+                const batch = writeBatch(db);
+                batch.update(doc(db, window.teamsColl.path, teamId), { score: newScore });
+                batch.update(window.stateDocRef, { lastScoreEvents: { id: batchId, events: [{teamId, points}] } });
+                await batch.commit();
+            } catch(e) { console.error(e); }
+        };
+
+        window.launchQuestion = async (qId) => {
+            const q = window.quizData.questions.find(x => x.id === qId);
+            const r = window.quizData.rounds.find(x => x.id === q.roundId);
+            if(!q || !r) return;
+            
+            let scramble = [];
+            if(r.type === 'order' && q.options) { scramble = [2, 0, 3, 1]; } 
+
+            let pTeam = null;
+            if(r.type === 'charades') {
+                const sel = document.getElementById(`charades-pre-team-${r.id}`);
+                if(sel && sel.value) pTeam = sel.value;
+                else return window.showAppAlert("कृपया पहले परफॉर्म करने वाली टीम का चयन करें! (Select Team First)");
+            }
+
+            try {
+                await updateDoc(window.stateDocRef, { status: 'loading-question', timerStoppedAt: null, teamAnswers: {}, buzzerWinner: null, buzzerTime: null });
+                window.playTone('tick'); 
+                
+                setTimeout(async () => {
+                    const batch = writeBatch(db);
+                    batch.update(window.stateDocRef, {
+                        status: 'active', activeRoundId: r.id, activeQuestionId: q.id, isSample: !!q.isSample, 
+                        startTime: Date.now(), timerStoppedAt: null, buzzerWinner: null, buzzerTime: null, teamAnswers: {}, scrambleSequence: scramble,
+                        performingTeamId: pTeam, showOrderAnswer: false
+                    });
+                    batch.update(doc(db, window.questionsColl.path, q.id), { asked: true });
+                    await batch.commit();
+                }, 1500); 
+            } catch(e) {}
+        };
+
+        window.openRapidSetupModal = (roundId, isSample) => {
+            document.getElementById('rapid-setup-round-id').value = roundId;
+            document.getElementById('rapid-setup-is-sample').value = isSample;
+            document.getElementById('rapid-setup-desc').textContent = isSample ? "Launching ALL sample questions for practice. No points awarded." : "Launching max 10 real questions. Points will be awarded.";
+            const btn = document.getElementById('rapid-setup-launch-btn');
+            btn.className = `flex-1 py-3 text-white rounded-xl font-black uppercase text-sm shadow active:scale-95 transition ${isSample ? 'bg-orange-600 hover:bg-orange-700' : 'bg-red-600 hover:bg-red-700'}`;
+            btn.textContent = isSample ? "प्रैक्टिस (Sample Launch)" : "रैपिड लॉन्च (Rapid Launch)";
+            
+            const sel = document.getElementById('rapid-setup-target');
+            sel.innerHTML = '<option value="all">सभी टीमें (All Teams)</option>' + window.quizData.teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+            window.openModal('modal-rapid-setup');
+        };
+
+        window.startRapidFireBatch = async () => {
+            const roundId = document.getElementById('rapid-setup-round-id').value;
+            const targetId = document.getElementById('rapid-setup-target').value;
+            const isSample = document.getElementById('rapid-setup-is-sample').value === 'true';
+            try {
+                await updateDoc(window.stateDocRef, { status: 'loading-question', timerStoppedAt: null, teamAnswers: {} });
+                setTimeout(async () => {
+                    await updateDoc(window.stateDocRef, { status: 'rapid', activeRoundId: roundId, activeQuestionId: null, rapidTarget: targetId, rapidIsSample: isSample, startTime: Date.now(), timerStoppedAt: null, teamAnswers: {} });
+                }, 1500);
+                window.closeModal('modal-rapid-setup');
+            } catch(e) { window.showAppAlert("Error launching rapid fire."); }
+        };
+
+        window.wipeDatabase = async () => {
+            try {
+                const batch = writeBatch(db);
+                window.quizData.teams.forEach(t => batch.delete(doc(db, window.teamsColl.path, t.id)));
+                await batch.commit();
+                window.showAppAlert("All teams wiped.");
+            } catch(e) {}
+        };
+
+        window.adjustManualScore = async (mode) => {
+            const tid = document.getElementById('org-score-team').value;
+            if(!tid) return window.showAppAlert("Select a team first!");
+            const r = window.quizData.rounds.find(x => x.id === window.quizData.state.activeRoundId);
+            let pts = 0;
+            if(mode === 'plus' && r) pts = r.rules.pts || 0;
+            else if(mode === 'minus' && r) pts = -Math.abs(r.rules.neg !== undefined ? r.rules.neg : -5);
+            else if(mode === 'custom') pts = parseInt(document.getElementById('org-score-val').value) || 0;
+            await window.awardPoints(tid, pts);
+            document.getElementById('org-score-val').value = ''; 
+        };
+
+        window.unlockBuzzer = async () => { try { await updateDoc(window.stateDocRef, {buzzerWinner: null, buzzerTime: null}); } catch(e) {} };
+
+        function handleStateChange(state) {
+            const badge = document.getElementById('org-status-badge');
+            if(badge) {
+                badge.textContent = state.status.toUpperCase();
+                badge.className = `px-3 py-1.5 rounded text-[10px] font-black uppercase tracking-wider shadow-inner ${state.status==='active'||state.status==='rapid'?'bg-emerald-500 text-white' : state.status==='final-leaderboard'?'bg-yellow-500 text-slate-900' : 'bg-slate-700 text-white'}`;
+            }
+            
+            const regBtn = document.getElementById('btn-toggle-reg');
+            if(regBtn) {
+                if(state.registrationOpen !== false) {
+                    regBtn.textContent = "Reg: OPEN";
+                    regBtn.className = "px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[10px] font-black shadow transition active:scale-95 border border-emerald-400";
+                } else {
+                    regBtn.textContent = "Reg: CLOSED";
+                    regBtn.className = "px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded text-[10px] font-black shadow transition active:scale-95 border border-red-400";
+                }
+            }
+
+            if(window.currentRole === 'main-screen') {
+                const audio = document.getElementById('bgm-player');
+                if(audio && state.bgm) {
+                    audio.volume = state.bgm.volume || 0.5;
+                    if(state.bgm.playing) { audio.play().catch(e => console.log("BGM Blocked")); } 
+                    else { audio.pause(); }
+                }
+            }
+            
+            const bgmBtn = document.getElementById('btn-bgm-toggle');
+            if(bgmBtn && state.bgm) {
+                bgmBtn.className = state.bgm.playing ? "text-blue-500 transition" : "text-slate-400 hover:text-white transition";
+                document.getElementById('bgm-vol-slider').value = state.bgm.volume || 0.5;
+            }
+
+            if(state.lastScoreEvents && state.lastScoreEvents.id !== window.lastSeenScoreEventId) {
+                window.lastSeenScoreEventId = state.lastScoreEvents.id;
+                state.lastScoreEvents.events.forEach((ev, idx) => {
+                    if(window.triggerScoreAnimation) window.triggerScoreAnimation(ev, idx);
+                });
+            }
+
+            if(state.status === 'loading-question' || state.status === 'round-intro') {
+                window.timeUpLocked = false;
+                window.timeUpPlayed = false;
+                window.rapidAnswers = {};
+                window.currentOrderSelection = [];
+                window.lastHintPts = null;
+                clearInterval(window.clientTimerInterval);
+            }
+
+            if(window.currentActiveQuestionId !== state.activeQuestionId || window.currentActiveRoundId !== state.activeRoundId) {
+                window.currentActiveQuestionId = state.activeQuestionId;
+                window.currentActiveRoundId = state.activeRoundId;
+                window.timeUpLocked = false;
+                window.timeUpPlayed = false;
+                window.rapidAnswers = {};
+                window.currentOrderSelection = [];
+                window.lastHintPts = null;
+            }
+
+            if(window.currentRole === 'team') window.updateTeamUI();
+            if(window.currentRole === 'main-screen') window.renderMainScreen();
+            if(window.currentRole === 'organizer') window.updateLiveOrgPanel();
+            
+            clearInterval(window.clientTimerInterval);
+            if((state.status === 'active' || state.status === 'rapid' || state.status === 'question-result') && state.startTime) {
+                window.clientTimerInterval = setInterval(() => {
+                    const elapsed = Math.floor(((state.timerStoppedAt || Date.now()) - state.startTime)/1000);
+                    window.dispatchLocalTick(elapsed);
+                }, 100); 
+            } else if (state.timerStoppedAt && state.startTime) {
+                const elapsed = Math.floor((state.timerStoppedAt - state.startTime)/1000);
+                window.dispatchLocalTick(elapsed);
+            } else {
+                window.timeUpLocked = false;
+                window.timeUpPlayed = false;
+            }
+        }
+
+        window.dispatchLocalTick = (elapsed) => {
+            const state = window.quizData.state;
+            const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+            if(!r) return;
+            const remaining = Math.max(0, (r.rules.time || 30) - elapsed);
+            
+            if (window.currentRole === 'team') {
+                if (state.status === 'rapid') {
+                    const tText = document.getElementById('team-rapid-timer');
+                    if (tText) tText.textContent = remaining + "s";
+                    if (remaining === 0 && !state.timerStoppedAt && !window.timeUpLocked) {
+                        window.timeUpLocked = true;
+                        window.submitRapidFireBatch();
+                        window.updateTeamUI(); 
+                    }
+                } else if (state.status === 'active' && !state.timerStoppedAt) {
+                    const tText = document.getElementById('team-timer-text');
+                    if (tText && r.rules.time > 0) {
+                        tText.textContent = remaining + "s";
+                    }
+                    if (remaining === 0 && r.rules.time > 0) {
+                        if (!window.timeUpLocked) { window.timeUpLocked = true; window.updateTeamUI(); }
+                    } else if (remaining > 0) { window.timeUpLocked = false; }
+                } else if (state.timerStoppedAt) {
+                    const tText = document.getElementById('team-timer-text');
+                    if (tText) tText.textContent = "STOP";
+                    if (!window.timeUpLocked) { window.timeUpLocked = true; window.updateTeamUI(); }
+                }
+            }
+
+            if (window.currentRole === 'main-screen') {
+                if(state.status === 'rapid') {
+                    const tText = document.getElementById('proj-rapid-timer');
+                    if(tText) {
+                        tText.textContent = remaining + "s";
+                        if(remaining <= 10 && remaining > 0 && !state.timerStoppedAt) tText.classList.add('text-red-500', 'animate-ping');
+                        else tText.classList.remove('animate-ping', 'text-red-500');
+                        
+                        if(remaining <= 10 && remaining > 0 && !state.timerStoppedAt) {
+                            if(window.lastTickSec !== remaining) { window.lastTickSec = remaining; window.playTone('tick'); }
+                        }
+                        if(remaining === 0 && !state.timerStoppedAt) {
+                            if(!window.timeUpPlayed) { window.playTone('timeup'); window.timeUpPlayed = true; }
+                        } else if (remaining > 0 || state.timerStoppedAt) { window.timeUpPlayed = false; }
+                        
+                        if(state.timerStoppedAt) { tText.classList.remove('animate-ping'); tText.classList.add('text-slate-500'); tText.textContent = "STOPPED"; }
+                    }
+                    const subContainer = document.getElementById('proj-rapid-subs');
+                    if(subContainer && state.teamAnswers) {
+                        const subs = Object.keys(state.teamAnswers);
+                        subContainer.innerHTML = subs.map(tid => {
+                            const t = window.quizData.teams.find(x=>x.id===tid);
+                            return `<span class="px-6 py-4 bg-emerald-500/20 text-emerald-400 font-black rounded-2xl text-3xl shadow-lg border-2 border-emerald-500/50 flex items-center gap-3 drop-shadow-md"><i class="fa-solid fa-check-circle"></i> ${t?.name}</span>`;
+                        }).join('');
+                        if(subs.length === 0) subContainer.innerHTML = '<span class="text-slate-500 font-bold italic text-2xl">Waiting for submissions...</span>';
+                    }
+                }
+                else if(state.status === 'active' && !state.timerStoppedAt) {
+                    const tText = document.getElementById('proj-timer-num');
+                    const q = window.quizData.questions.find(x => x.id === state.activeQuestionId);
+                    
+                    if(tText && r.rules.time > 0) {
+                        tText.textContent = remaining + "s";
+                    }
+
+                    if(r.rules.time > 0) {
+                        if(remaining <= 10 && remaining > 0) {
+                            tText.classList.add('timer-intense');
+                            if(window.lastTickSec !== remaining) { window.lastTickSec = remaining; window.playTone('tick'); }
+                        } else {
+                            tText.classList.remove('timer-intense');
+                        }
+                        if(remaining === 0) {
+                            if(!window.timeUpPlayed) { window.playTone('timeup'); window.timeUpPlayed = true; }
+                            tText.classList.remove('timer-intense');
+                        } else { window.timeUpPlayed = false; }
+                    }
+
+                    if(r.type === 'hints' && q && q.hints) {
+                        const calcElapsed = state.buzzerTime !== null && state.buzzerTime !== undefined ? Math.floor(state.buzzerTime / 1000) : elapsed;
+                        const autoTime = r.rules.autoTime || 10;
+                        const hintsToShow = Math.min(3, Math.floor(calcElapsed / autoTime));
+                        
+                        let currentPts = 20;
+                        if(hintsToShow === 1) currentPts = 15;
+                        else if(hintsToShow === 2) currentPts = 10;
+                        else if(hintsToShow >= 3) currentPts = 5;
+                        
+                        const ptsEl = document.getElementById('proj-active-pts');
+                        if(ptsEl && !q.isSample) {
+                            ptsEl.innerHTML = `<span class="text-emerald-500">+${currentPts}</span><span class="text-slate-600">|</span><span class="text-red-500">${-Math.abs(r.rules.neg || -10)}</span>`;
+                            if (window.lastHintPts !== currentPts && !state.buzzerWinner) {
+                                window.lastHintPts = currentPts;
+                                ptsEl.classList.add('timer-intense');
+                                setTimeout(() => ptsEl.classList.remove('timer-intense'), 800);
+                            }
+                        }
+                        
+                        const hc = document.getElementById('proj-hints-container');
+                        if(hc) {
+                            let hHtml = '';
+                            for(let i=0; i<hintsToShow; i++) {
+                                if(q.hints[i]) hHtml += `<div class="bg-blue-50/95 backdrop-blur-xl border-l-[12px] border-blue-500 p-8 rounded-r-[2rem] shadow-xl mb-4 text-left"><span class="text-blue-800 font-black uppercase tracking-widest text-lg block mb-2">संकेत (Hint) ${i+1}</span><p class="text-4xl font-bold text-slate-800 leading-tight">${q.hints[i]}</p></div>`;
+                            }
+                            hc.innerHTML = hHtml;
+                        }
+                    }
+                } else if (state.timerStoppedAt) {
+                    const tText = document.getElementById('proj-timer-num');
+                    if(tText) { tText.textContent = "STOP"; tText.classList.remove('timer-intense'); }
+                }
+            }
+        };
+
+        window.triggerScoreAnimation = (event, index = 0) => {
+            if(window.currentRole !== 'main-screen') return;
+            const container = document.getElementById('projector-animations');
+            if(!container) return;
+            const team = window.quizData.teams.find(t => t.id === event.teamId);
+            const isPos = event.points > 0;
+            const isZero = event.points === 0;
+            
+            if(index === 0) {
+                if(isPos) window.playTone('correct');
+                else if(!isZero) window.playTone('wrong');
+            }
+            
+            const el = document.createElement('div');
+            el.className = 'absolute z-[999] flex items-center justify-center pointer-events-none score-anim';
+            
+            el.style.left = `calc(50% - 150px + ${Math.random()*200 - 100}px)`;
+            el.style.top = `calc(50% - 150px + ${Math.random()*100 - 50}px)`;
+            el.style.animationDelay = `${index * 0.2}s`;
+
+            el.innerHTML = `
+                <div class="flex flex-col items-center bg-slate-900/90 backdrop-blur-3xl p-12 rounded-[4rem] border-4 ${isPos?'border-emerald-500':isZero?'border-slate-500':'border-red-500'} shadow-[0_30px_60px_rgba(0,0,0,0.8)]">
+                    <span class="text-[12rem] font-black leading-none drop-shadow-2xl ${isPos?'text-emerald-400':isZero?'text-slate-300':'text-red-500'}">${isPos?'+':''}${event.points}</span>
+                    <span class="text-5xl font-black text-white mt-6 bg-slate-800 px-8 py-3 rounded-full border-2 border-white/20 uppercase tracking-widest drop-shadow-md">${team?.name || 'Team'}</span>
+                </div>
+            `;
+            container.appendChild(el); setTimeout(() => el.remove(), 4500 + (index * 200));
+        };
+
+        window.renderSidebarLeaderboard = () => {
+            const container = document.getElementById('sidebar-leaderboard-list');
+            const titleEl = document.getElementById('sidebar-title-text');
+            const subtitleEl = document.getElementById('sidebar-subtitle-text');
+            if(!container) return;
+            
+            let teams = [...window.quizData.teams].sort((a,b) => b.score - a.score);
+            let parts = window.quizData.participants || [];
+
+            if(teams.length === 0 && parts.length > 0) {
+                if(titleEl) titleEl.textContent = "प्रतिभागी (POOL)";
+                if(subtitleEl) subtitleEl.textContent = `कुल (Total): ${parts.length}`;
+                
+                container.innerHTML = parts.map((p, i) => `
+                    <div class="bg-slate-800/80 rounded-xl p-3 flex items-center gap-3 border border-white/5 relative overflow-hidden transition-all mb-2">
+                        <div class="w-8 h-8 shrink-0 rounded-lg bg-blue-600/50 text-white flex items-center justify-center font-black text-xs">
+                            ${i+1}
+                        </div>
+                        <span class="text-white font-bold text-sm truncate">${p.name}</span>
+                    </div>
+                `).join('');
+                return;
+            }
+
+            if(titleEl) titleEl.textContent = "लीडरबोर्ड";
+            if(subtitleEl) subtitleEl.textContent = "LIVE STANDINGS";
+
+            if(teams.length === 0) { container.innerHTML = '<p class="text-white/50 text-center text-sm font-bold mt-10 border-2 border-dashed border-white/20 p-4 rounded-xl">No teams yet</p>'; return; }
+            
+            let rankedTeams = []; let currentRank = 1; let currentScore = teams[0]?.score;
+            teams.forEach((t, i) => {
+                if(t.score < currentScore) { currentRank = i + 1; currentScore = t.score; }
+                rankedTeams.push({...t, rank: currentRank});
+            });
+
+            container.innerHTML = rankedTeams.map(t => `
+                <div class="bg-slate-800/80 rounded-xl p-4 flex justify-between items-start border ${t.rank===1 ? 'border-yellow-500/50 shadow-[0_0_15px_rgba(234,179,8,0.2)]' : 'border-white/5'} relative overflow-hidden transition-all mb-3">
+                    ${t.rank === 1 ? '<div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-transparent z-0"></div>' : ''}
+                    <div class="flex items-start gap-4 z-10 w-full pr-2">
+                        <div class="w-10 h-10 shrink-0 rounded-lg ${t.rank===1?'bg-yellow-500 text-slate-900 shadow-lg shadow-yellow-500/50':'bg-slate-700 text-white'} flex items-center justify-center font-black text-lg relative mt-1">
+                            ${t.rank} ${t.rank === 1 ? '<i class="fa-solid fa-crown absolute -top-4 text-yellow-400 text-xl drop-shadow-md"></i>' : ''}
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-white font-black text-xl leading-tight tracking-wide truncate">${t.name}</span>
+                                <span class="text-[10px] ${t.isOnline?'text-emerald-400':'text-red-400'} font-bold uppercase tracking-widest shrink-0"><i class="fa-solid fa-circle text-[8px] mr-1"></i>${t.isOnline?'On':'Off'}</span>
+                            </div>
+                            <div class="text-sm text-slate-300 font-bold bg-slate-900/50 p-2 rounded-lg border border-slate-700/50 line-clamp-2 leading-relaxed">
+                                ${(t.members||[]).map((m,idx) => `<span class="inline-block mr-2 whitespace-nowrap"><span class="text-slate-500">${idx+1}.</span> ${m}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black ${t.rank===1?'text-yellow-400':'text-blue-300'} z-10 shrink-0 mt-2">${t.score}</div>
+                </div>
+            `).join('');
+        };
+
+        window.renderMainScreen = () => {
+            const state = window.quizData.state;
+            const container = document.getElementById('projector-content');
+            const qrOverlay = document.getElementById('projector-qr-overlay');
+            qrOverlay.classList.toggle('hidden', !state.showQR);
+
+            const regBadge = document.getElementById('proj-reg-status');
+            if(regBadge) {
+                if(state.registrationOpen !== false) {
+                    regBadge.textContent = "REGISTRATION: OPEN";
+                    regBadge.className = "absolute top-8 left-8 z-[60] px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest shadow-lg border-2 backdrop-blur-md bg-emerald-500/20 border-emerald-400 text-emerald-300";
+                } else {
+                    regBadge.textContent = "REGISTRATION: CLOSED";
+                    regBadge.className = "absolute top-8 left-8 z-[60] px-6 py-2 rounded-full font-black text-sm uppercase tracking-widest shadow-lg border-2 backdrop-blur-md bg-red-500/20 border-red-400 text-red-300";
+                }
+            }
+
+            if (state.buzzerWinner && state.buzzerWinner !== window.lastBuzzerWinner) {
+                window.lastBuzzerWinner = state.buzzerWinner;
+                window.playTone('buzzer');
+            }
+
+            if (state.status === 'loading-question') {
+                 container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full w-full animate-[scaleIn_0.3s_ease-out]">
+                         <i class="fa-solid fa-spinner fa-spin text-[8rem] text-blue-500 mb-8"></i>
+                         <h2 class="text-[6rem] text-white font-black uppercase tracking-widest drop-shadow-xl">तैयार रहें... (Get Ready)</h2>
+                    </div>
+                 `;
+            }
+            else if(state.status === 'intermission') {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center text-center animate-[scaleIn_0.5s_ease-out] w-full h-full">
+                        <i class="fa-solid fa-hourglass text-blue-500 text-[10rem] mb-10 drop-shadow-xl animate-pulse"></i>
+                        <h2 class="text-[6rem] text-white font-black uppercase tracking-widest drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] mb-4">अगला प्रश्न जल्द ही...</h2>
+                        <p class="text-3xl text-slate-300 font-bold bg-slate-800/50 px-8 py-3 rounded-full border border-slate-600 shadow-inner">Get Ready For The Next Question</p>
+                    </div>
+                `;
+            }
+            else if(state.status === 'waiting') {
+                const parts = window.quizData.participants || [];
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center text-center animate-[scaleIn_0.5s_ease-out] w-full h-full relative overflow-hidden">
+                        <h1 class="text-[5rem] lg:text-[7rem] text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-400 drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] font-black tracking-wider uppercase mb-6 leading-tight w-full max-w-5xl mx-auto border-b-4 border-white/20 pb-4 relative z-10">हिन्दी पखवाड़ा प्रश्नोत्तरी</h1>
+                        <div class="bg-white/10 p-10 rounded-[3rem] backdrop-blur-xl border border-white/30 shadow-[0_30px_60px_rgba(0,0,0,0.6)] w-full max-w-4xl relative z-10 mb-8">
+                            <h2 class="text-4xl lg:text-5xl text-white font-black tracking-widest uppercase mb-10 drop-shadow-lg"><i class="fa-solid fa-fan animate-spin-slow mr-4 text-pink-400"></i> सादर आमंत्रण <i class="fa-solid fa-fan animate-spin-slow ml-4 text-pink-400"></i></h2>
+                            <h3 class="text-xl text-yellow-200 font-black mb-8 uppercase tracking-widest bg-black/40 inline-block px-8 py-2 rounded-full border border-yellow-400/50 shadow-inner">आयोजक समिति (Organizers)</h3>
+                            <div class="grid grid-cols-2 gap-x-8 gap-y-6 text-2xl text-white font-bold text-left px-8 mb-8">
+                                <span class="flex items-center gap-4 bg-gradient-to-r from-pink-600/60 to-purple-600/60 p-4 rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition-transform"><i class="fa-solid fa-star text-yellow-300 text-2xl drop-shadow-md"></i> डॉ. मनीषा गुप्ता</span>
+                                <span class="flex items-center gap-4 bg-gradient-to-r from-purple-600/60 to-indigo-600/60 p-4 rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition-transform"><i class="fa-solid fa-star text-yellow-300 text-2xl drop-shadow-md"></i> डॉ. अर्पित चौकसे</span>
+                                <span class="flex items-center gap-4 bg-gradient-to-r from-indigo-600/60 to-blue-600/60 p-4 rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition-transform"><i class="fa-solid fa-star text-yellow-300 text-2xl drop-shadow-md"></i> डॉ. ममता चौहान</span>
+                                <span class="flex items-center gap-4 bg-gradient-to-r from-blue-600/60 to-cyan-600/60 p-4 rounded-2xl border border-white/20 shadow-lg hover:scale-105 transition-transform"><i class="fa-solid fa-star text-yellow-300 text-2xl drop-shadow-md"></i> श्री जावेद अकरम</span>
+                            </div>
+                        </div>
+                        ${parts.length > 0 && window.quizData.teams.length === 0 ? `
+                            <div class="w-full max-w-4xl bg-slate-900/80 backdrop-blur-md p-6 rounded-3xl border border-slate-600 shadow-xl z-10">
+                                <h4 class="text-white font-black uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">रजिस्टर्ड प्रतिभागी (Registered Pool: ${parts.length})</h4>
+                                <div class="flex flex-wrap justify-center gap-3 max-h-48 overflow-y-auto">
+                                    ${parts.map(p => `<span class="bg-blue-600/30 border border-blue-500/50 text-blue-200 px-4 py-2 rounded-lg font-bold shadow-sm">${p.name}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            else if(state.status === 'rulebook') {
+                container.innerHTML = `
+                    <div class="glass-panel p-12 rounded-[3rem] text-left w-full h-[90%] overflow-y-auto max-w-[95%] animate-[scaleIn_0.3s]">
+                       <h1 class="text-5xl font-black mb-8 text-center text-blue-800 border-b-4 border-blue-200 pb-4 uppercase tracking-widest">आधिकारिक नियम पुस्तिका (Official Rulebook)</h1>
+                       <div class="space-y-8 text-2xl font-bold text-slate-800 leading-relaxed bg-white/50 p-10 rounded-3xl shadow-inner border border-white">
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-bolt text-3xl text-orange-500 mt-1"></i><p><strong>रैपिड फायर (Rapid Fire):</strong> 10 प्रश्न, 120 सेकंड। सही: +10, गलत: -5, अनुत्तरित: 0।</p></div>
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-hand-pointer text-3xl text-blue-500 mt-1"></i><p><strong>फास्टेस्ट फिंगर (Fastest Finger):</strong> 20 सेकंड। जो सबसे पहले सही उत्तर देगा उसे +10 अंक। गलत/अनुत्तरित: 0।</p></div>
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-bell text-3xl text-red-500 mt-1"></i><p><strong>बज़र राउंड (Buzzer):</strong> 30 सेकंड। सही: +10, गलत या बज़र के बाद अनुत्तरित: -5।</p></div>
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-list-ol text-3xl text-purple-500 mt-1"></i><p><strong>क्रम व्यवस्था (Chronology):</strong> 20 सेकंड। सही क्रम लगाने पर +10 अंक। गलत/अनुत्तरित: 0।</p></div>
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-masks-theater text-3xl text-indigo-500 mt-1"></i><p><strong>मूक अभिनय (Dumb Charades):</strong> 60 सेकंड। सही अनुमान लगाने पर +10 अंक। गलत/अनुत्तरित: 0।</p></div>
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-lightbulb text-3xl text-yellow-500 mt-1"></i><p><strong>संकेत राउंड (Hints):</strong> 40 सेकंड। 0 संकेत: 20 अंक | 1 संकेत: 15 अंक | 2 संकेत: 10 अंक | 3 संकेत: 5 अंक। गलत/अनुत्तरित: -10।</p></div>
+                           <div class="flex items-start gap-4"><i class="fa-solid fa-scale-balanced text-3xl text-teal-500 mt-1"></i><p><strong>टाई-ब्रेकर (Tie Breaker):</strong> 30 सेकंड। सही: +10, गलत या बज़र के बाद अनुत्तरित: -5।</p></div>
+                       </div>
+                    </div>
+                `;
+            }
+            else if(state.status === 'round-intro') {
+                const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+                if(!r) return;
+                container.innerHTML = `
+                    <div class="glass-panel p-16 rounded-[4rem] text-center w-full max-w-[95%] animate-[scaleIn_0.3s] border-4 border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+                        <span class="text-2xl font-black bg-teal-600 text-white px-8 py-3 rounded-full uppercase tracking-widest shadow-lg mb-8 inline-block drop-shadow-md"><i class="fa-solid fa-bullhorn mr-2"></i> ${r.type.replace('-', ' ')}</span>
+                        <h1 class="text-[5rem] lg:text-[6rem] font-black mb-8 text-slate-800 uppercase tracking-widest leading-tight drop-shadow-md">${r.name}</h1>
+                        <h2 class="text-4xl font-bold text-blue-800 border-b-4 border-blue-200 pb-4 inline-block mb-8 uppercase tracking-wider">राउंड के नियम (Rules)</h2>
+                        ${r.desc ? `<p class="text-3xl font-bold text-slate-700 leading-relaxed bg-slate-50/80 p-10 rounded-3xl shadow-inner border border-slate-200 whitespace-pre-wrap">${r.desc}</p>` : `<p class="text-3xl font-bold text-slate-500 italic">इस राउंड के लिए कोई विशेष विवरण नहीं है।</p>`}
+                        
+                        <div class="mt-10 flex justify-center gap-6">
+                             ${r.rules.pts !== undefined ? `<span class="bg-emerald-100 text-emerald-800 px-6 py-3 rounded-2xl font-black text-3xl border-2 border-emerald-300 shadow-sm">सही (Correct): +${r.rules.pts}</span>` : ''}
+                             ${r.rules.neg !== undefined ? `<span class="bg-red-100 text-red-800 px-6 py-3 rounded-2xl font-black text-3xl border-2 border-red-300 shadow-sm">गलत (Wrong): ${r.rules.neg}</span>` : ''}
+                             ${r.rules.time !== undefined ? `<span class="bg-blue-100 text-blue-800 px-6 py-3 rounded-2xl font-black text-3xl border-2 border-blue-300 shadow-sm"><i class="fa-regular fa-clock"></i> ${r.rules.time}s</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            else if(state.status === 'allocation') {
+                const alloc = state.teamAllocation || [];
+                container.innerHTML = `
+                    <button onclick="setMainScreenState('intermission')" class="absolute top-4 right-20 z-[100] px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl font-black shadow-lg transition"><i class="fa-solid fa-arrow-left mr-2"></i> वापस जाएं</button>
+                    <div class="w-full flex flex-col items-center animate-[scaleIn_0.3s] h-full overflow-y-auto pb-20 mt-10">
+                        <h2 class="text-[5rem] font-black text-white drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] uppercase mb-4">टीमें (Teams)</h2>
+                        <p class="text-2xl text-yellow-300 font-bold mb-12 bg-slate-900/50 px-8 py-3 rounded-full border border-yellow-500/30 shadow-lg text-center leading-relaxed">कृपया अपनी टीम और <span class="text-white">PIN</span> देखें, फिर मोबाइल से जुड़ें</p>
+                        <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-[95%]">
+                            ${alloc.map((team) => `
+                                <div class="bg-slate-800/90 backdrop-blur-xl p-8 rounded-3xl border-4 border-slate-600 shadow-2xl relative overflow-hidden">
+                                    <div class="absolute top-0 right-0 bg-emerald-500 text-white px-4 py-1 rounded-bl-xl font-black text-xl shadow-md">PIN: ${team.pin}</div>
+                                    <h3 class="text-4xl font-black text-white mb-6 border-b-2 border-slate-500 pb-4 mt-2 text-center">${team.name}</h3>
+                                    <ul class="space-y-3">
+                                        ${team.members.map((m,idx) => `<li class="text-2xl font-bold text-slate-300 flex items-center gap-3"><span class="w-6 h-6 rounded bg-slate-700 text-white flex items-center justify-center text-xs">${idx+1}</span> ${m}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            else if (state.status === 'rapid') {
+                const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+                if(!r) return;
+                const targetName = state.rapidTarget === 'all' ? 'सभी टीमें (All Teams)' : (window.quizData.teams.find(t=>t.id===state.rapidTarget)?.name || '');
+                const isSample = !!state.rapidIsSample;
+                container.innerHTML = `
+                    <div class="w-full flex flex-col items-center animate-[scaleIn_0.3s] mt-8 max-w-[95%]">
+                        <span class="text-3xl font-black ${isSample ? 'bg-orange-600 border-orange-400 shadow-[0_10px_20px_rgba(234,88,12,0.5)]' : 'bg-red-600 border-red-400 shadow-[0_10px_20px_rgba(220,38,38,0.5)]'} text-white px-10 py-4 rounded-full uppercase border-4 mb-8 flex items-center gap-3"><i class="fa-solid fa-${isSample?'vial':'bolt'} text-yellow-300"></i> ${isSample ? 'प्रैक्टिस (PRACTICE)' : 'रैपिड फायर (Rapid Fire)'}</span>
+                        <h2 class="text-[5rem] font-black text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.9)] mb-8 text-center leading-tight">${targetName}</h2>
+                        <div class="text-[15rem] leading-none font-black text-yellow-400 drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)] tracking-tighter mb-16" id="proj-rapid-timer">${r.rules.time}s</div>
+                        <div class="w-full max-w-5xl bg-slate-800/80 backdrop-blur-xl p-10 rounded-[3rem] border-2 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"><h3 class="text-center text-slate-400 font-bold uppercase tracking-widest mb-8 text-xl">Team Submissions</h3><div class="flex gap-6 flex-wrap justify-center w-full" id="proj-rapid-subs"></div></div>
+                    </div>
+                `;
+            }
+            else if (state.status === 'rapid-results') {
+                const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+                const isSample = !!state.rapidIsSample;
+                let qs = window.quizData.questions.filter(x => x.roundId === state.activeRoundId && !!x.isSample === isSample);
+                if (!isSample) qs = qs.slice(0, 10);
+                const targetId = state.rapidTarget;
+                const subs = state.teamAnswers || {};
+                
+                let teamsToRender = window.quizData.teams.filter(t => targetId === 'all' ? subs[t.id] : t.id === targetId);
+
+                let teamStatsHtml = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-8">`;
+                teamsToRender.forEach(t => {
+                    const ansObj = subs[t.id] || {};
+                    let c=0, w=0, s=0;
+                    qs.forEach(q => {
+                       if(ansObj[q.id] !== undefined) {
+                           if(q.options[ansObj[q.id]] === q.answer) c++; else w++;
+                       } else { s++; }
+                    });
+                    const pts = (c * (r.rules.pts||0)) + (w * -Math.abs(r.rules.neg||0));
+                    teamStatsHtml += `
+                        <div class="bg-slate-800/90 border border-slate-600 p-4 rounded-2xl flex flex-col items-center shadow-lg">
+                            <span class="text-xl font-black text-white mb-2">${t.name}</span>
+                            <div class="flex gap-4 text-sm font-bold mb-3">
+                                <span class="text-emerald-400 bg-emerald-900/50 px-3 py-1.5 rounded-lg border border-emerald-500/30 shadow-inner">✅ ${c}</span>
+                                <span class="text-red-400 bg-red-900/50 px-3 py-1.5 rounded-lg border border-red-500/30 shadow-inner">❌ ${w}</span>
+                                <span class="text-slate-400 bg-slate-900/50 px-3 py-1.5 rounded-lg border border-slate-600/50 shadow-inner">➖ ${s}</span>
+                            </div>
+                            ${!isSample ? `<span class="text-2xl font-black ${pts>=0?'text-blue-400':'text-red-400'}">${pts>=0?'+':''}${pts} Pts</span>` : `<span class="text-orange-400 font-bold bg-orange-900/40 px-3 py-1 rounded-md border border-orange-500/50">PRACTICE (NO PTS)</span>`}
+                        </div>
+                    `;
+                });
+                teamStatsHtml += `</div>`;
+
+                let questionsHtml = `<div class="w-full space-y-4 max-h-[45vh] overflow-y-auto pr-4">`;
+                qs.forEach((q, i) => {
+                    let teamAnsHtml = teamsToRender.map(t => {
+                        const ansIndex = (subs[t.id] && subs[t.id][q.id] !== undefined) ? subs[t.id][q.id] : null;
+                        const ansText = ansIndex !== null ? q.options[ansIndex] : null;
+                        const isCorrect = ansText === q.answer;
+                        const isSkipped = ansText === null;
+                        const icon = isCorrect ? '<i class="fa-solid fa-check text-emerald-400"></i>' : (isSkipped ? '<i class="fa-solid fa-minus text-slate-500"></i>' : '<i class="fa-solid fa-xmark text-red-400"></i>');
+                        const color = isCorrect ? 'text-emerald-300 bg-emerald-900/30 border-emerald-500/30' : (isSkipped ? 'text-slate-400 bg-slate-800/50 border-slate-600/50' : 'text-red-300 bg-red-900/30 border-red-500/30');
+                        return `<div class="text-sm font-bold p-2.5 rounded-lg border ${color} flex justify-between items-center shadow-sm break-words whitespace-normal leading-tight">
+                            <span class="truncate pr-2">${t.name}</span> 
+                            <span class="shrink-0 flex items-center gap-2">${ansText ? ansText.substring(0,12)+(ansText.length>12?'..':'') : 'Skipped'} ${icon}</span>
+                        </div>`;
+                    }).join('');
+
+                    questionsHtml += `
+                        <div class="bg-slate-800/95 border border-slate-600 rounded-xl p-5 shadow-lg text-left">
+                            <div class="flex gap-4 items-start mb-4">
+                                <span class="bg-blue-600 text-white w-10 h-10 flex items-center justify-center rounded-xl font-black shrink-0 shadow-md text-lg">Q${i+1}</span>
+                                <p class="text-xl font-bold text-slate-200 leading-snug">${q.text}</p>
+                            </div>
+                            <div class="ml-14 mb-5">
+                                <span class="bg-emerald-900/60 border border-emerald-500/50 text-emerald-300 px-4 py-2 rounded-lg text-sm font-black uppercase tracking-widest shadow-inner"><i class="fa-solid fa-check-double mr-2"></i> Answer: ${q.answer}</span>
+                            </div>
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 ml-14">
+                                ${teamAnsHtml}
+                            </div>
+                        </div>
+                    `;
+                });
+                questionsHtml += `</div>`;
+
+                container.innerHTML = `
+                    <div class="w-full flex flex-col items-center animate-[scaleIn_0.3s] h-full overflow-hidden pb-10 mt-2 max-w-[95%]">
+                        <h2 class="text-[4rem] text-white font-black uppercase tracking-widest drop-shadow-xl mb-4 flex items-center gap-4">
+                            ${isSample ? '<i class="fa-solid fa-vial text-orange-500"></i> प्रैक्टिस परिणाम (Practice)' : 'रैपिड फायर परिणाम'}
+                        </h2>
+                        ${teamStatsHtml}
+                        <h3 class="w-full text-left text-xl font-black text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-700 pb-2">Questions & Responses</h3>
+                        ${questionsHtml}
+                    </div>
+                `;
+            }
+            else if (state.status === 'active' || state.status === 'question-result') {
+                const q = window.quizData.questions.find(x => x.id === state.activeQuestionId);
+                const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+                if(!q || !r) return;
+
+                const isResult = state.status === 'question-result';
+                let specificHtml = '';
+                
+                if(!isResult && r.type === 'charades') {
+                    const performingTeam = window.quizData.teams.find(t => t.id === state.performingTeamId);
+                    specificHtml = `
+                        <div class="mt-20 text-center w-full">
+                            ${performingTeam ? `<h3 class="text-6xl font-black text-purple-300 mb-8 drop-shadow-lg">${performingTeam.name} is Performing!</h3>` : '<h3 class="text-5xl font-bold text-slate-400 mb-8">Waiting for actor selection...</h3>'}
+                            <i class="fa-solid fa-masks-theater text-[10rem] text-purple-400/60 animate-bounce drop-shadow-2xl"></i>
+                            <p class="text-[4rem] font-black text-white drop-shadow-lg mt-8 text-center">मंच पर गए सदस्य का अभिनय देखें!<br><span class="text-2xl text-purple-200">(Watch the actor!)</span></p>
+                        </div>
+                    `;
+                }
+                else if(isResult && r.type === 'charades') {
+                    specificHtml = `
+                        <div class="bg-purple-600 border-8 border-purple-400 p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(168,85,247,0.5)] animate-bounce mt-10 w-full text-center">
+                            <span class="text-3xl font-black text-purple-200 uppercase tracking-widest block mb-4">मुहावरा / लोकोक्ति (Phrase)</span>
+                            <h3 class="text-6xl lg:text-7xl font-black text-white drop-shadow-xl leading-tight">${q.text}</h3>
+                        </div>
+                    `;
+                }
+                else if (isResult && (r.type === 'buzzer' || r.type === 'tiebreaker')) {
+                     specificHtml = `
+                        <div class="bg-emerald-600 border-8 border-emerald-400 p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(16,185,129,0.5)] mt-10 w-full text-center">
+                            <span class="text-3xl font-black text-emerald-100 uppercase tracking-widest block mb-4">सही उत्तर (Correct Answer)</span>
+                            <h3 class="text-6xl lg:text-7xl font-black text-white drop-shadow-xl leading-tight">${q.answer || 'Revealed'}</h3>
+                        </div>
+                     `;
+                }
+                else if(isResult && (r.type === 'fastest' || r.type === 'standard' || r.type === 'order')) {
+                    const subs = state.teamAnswers || {};
+                    let fffWinnerId = null;
+                    if (r.type === 'fastest') {
+                        const correctAnswers = Object.entries(subs).filter(([tid, data]) => q.options[data.o] === q.answer).sort((a,b) => a[1].t - b[1].t);
+                        if(correctAnswers.length > 0) fffWinnerId = correctAnswers[0][0];
+                    }
+
+                    specificHtml = `
+                        <div class="bg-emerald-600 border-8 border-emerald-400 p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(16,185,129,0.5)] mt-10 w-full text-center">
+                            <span class="text-3xl font-black text-emerald-100 uppercase tracking-widest block mb-4">सही उत्तर (Correct Answer)</span>
+                            <h3 class="text-6xl lg:text-7xl font-black text-white drop-shadow-xl leading-tight">${r.type === 'order' ? 'Check submitted sequence' : (q.answer || 'Revealed')}</h3>
+                        </div>
+                        ${r.type === 'order' ? `<div class="flex flex-col gap-3 w-full max-w-3xl mx-auto mt-6">${[0,1,2,3].map(idx => `<div class="bg-emerald-800/80 border border-emerald-400 text-emerald-100 px-6 py-3 rounded-xl text-2xl font-bold flex gap-4 items-center shadow-lg break-words whitespace-normal leading-snug"><span class="bg-emerald-500 text-white w-10 h-10 flex items-center justify-center rounded-lg">${idx+1}</span> ${q.options[idx]}</div>`).join('')}</div>` : ''}
+                        
+                        <div class="mt-8 w-full">
+                            <h4 class="text-2xl font-black text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-700 pb-2">टीमों के उत्तर (Team Responses)</h4>
+                            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                                ${Object.entries(subs).map(([tid, ans]) => {
+                                    const t = window.quizData.teams.find(x=>x.id===tid);
+                                    let isCorrect = false;
+                                    let displayAns = "";
+                                    let ptsChange = 0;
+                                    
+                                    if(r.type === 'order') {
+                                        isCorrect = JSON.stringify(ans) === JSON.stringify([0,1,2,3]);
+                                        displayAns = isCorrect ? "Perfect Sequence" : "Wrong Sequence";
+                                        ptsChange = isCorrect ? (r.rules.pts||0) : -Math.abs(r.rules.neg||0);
+                                    } else {
+                                        isCorrect = q.options[ans.o !== undefined ? ans.o : ans] === q.answer;
+                                        displayAns = q.options[ans.o !== undefined ? ans.o : ans];
+                                        if (r.type === 'fastest') {
+                                            ptsChange = (tid === fffWinnerId) ? (r.rules.pts||0) : 0;
+                                        } else {
+                                            ptsChange = isCorrect ? (r.rules.pts||0) : -Math.abs(r.rules.neg||0);
+                                        }
+                                    }
+                                    
+                                    const isFFFWinner = (r.type === 'fastest' && tid === fffWinnerId);
+                                    const cardColor = isCorrect ? (isFFFWinner ? 'bg-yellow-500 text-slate-900 border-yellow-200' : 'bg-emerald-900/60 border-emerald-500/50 text-emerald-100') : 'bg-red-900/60 border-red-500/50 text-red-100';
+
+                                    return `
+                                    <div class="p-4 rounded-2xl border-2 ${cardColor} shadow-lg flex flex-col justify-between relative overflow-hidden">
+                                        ${isFFFWinner ? '<div class="absolute top-0 right-0 bg-yellow-900 text-yellow-300 px-3 py-1 rounded-bl-xl font-black text-xs uppercase shadow-md animate-pulse">FASTEST!</div>' : ''}
+                                        <span class="font-black text-xl mb-1">${t?.name}</span>
+                                        <span class="font-bold text-sm opacity-80 mb-3 break-words whitespace-normal leading-snug" title="${displayAns}">${displayAns}</span>
+                                        <div class="flex justify-between items-center mt-auto">
+                                            <span class="text-2xl">${isCorrect ? '✅' : '❌'}</span>
+                                            <span class="font-black text-2xl ${ptsChange > 0 ? 'text-emerald-400' : (ptsChange < 0 ? 'text-red-400' : 'text-slate-400 opacity-50')}">${ptsChange > 0 ? '+'+ptsChange : ptsChange}</span>
+                                        </div>
+                                    </div>`;
+                                }).join('')}
+                                ${Object.keys(subs).length === 0 ? '<p class="text-slate-500 text-xl font-bold italic w-full col-span-full">No responses recorded.</p>' : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+                else if(!isResult && r.type === 'fastest') {
+                    const subs = state.teamAnswers || {};
+                    const lockedTeams = Object.entries(subs).sort((a,b) => a[1].t - b[1].t);
+                    specificHtml = `
+                        <div class="mt-12 flex gap-4 justify-center w-full flex-wrap">
+                            ${lockedTeams.map(([tid, ans], i) => {
+                                const t = window.quizData.teams.find(x=>x.id===tid);
+                                return `<div class="bg-slate-800 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-3 shadow-lg border border-slate-600"><span class="bg-blue-500 text-white px-2 py-1 rounded text-xs font-black shadow">${i+1}</span> <span class="text-xl">${t?.name}</span> <span class="text-blue-300 font-mono text-lg ml-2 border-l border-slate-600 pl-3">${(ans.t/1000).toFixed(2)}s</span></div>`;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+                else if(isResult && r.type === 'hints') {
+                    let fullHintsHTML = '';
+                    if(q.hints) {
+                        fullHintsHTML = `<div class="mt-8 flex flex-col gap-4 w-full">` + q.hints.map((h, i) => `<div class="bg-blue-50/95 border-l-[8px] border-blue-500 p-6 rounded-r-2xl text-left"><span class="text-blue-800 font-bold uppercase block mb-1">संकेत ${i+1}</span><p class="text-3xl font-black text-slate-800">${h}</p></div>`).join('') + `</div>`;
+                    }
+                    specificHtml = `
+                        ${fullHintsHTML}
+                        <div class="bg-emerald-600 border-8 border-emerald-400 p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(16,185,129,0.5)] animate-bounce mt-10 w-full text-center">
+                            <span class="text-3xl font-black text-emerald-100 uppercase tracking-widest block mb-4">सही उत्तर (Correct Answer)</span>
+                            <h3 class="text-6xl lg:text-7xl font-black text-white drop-shadow-xl leading-tight">${q.answer || 'Revealed'}</h3>
+                        </div>
+                    `;
+                }
+                else if(r.type === 'hints') {
+                    specificHtml = `
+                        <div class="mt-8 space-y-5 w-full" id="proj-hints-container"></div>
+                        ${state.buzzerWinner ? `<div class="fixed inset-0 z-[200] bg-slate-900/80 backdrop-blur-md flex items-center justify-center animate-[scaleIn_0.3s] p-4"><div class="bg-red-600 text-white px-12 py-12 rounded-[4rem] shadow-[0_20px_60px_rgba(220,38,38,0.6)] border-[10px] border-white text-center"><p class="text-3xl font-black uppercase tracking-widest opacity-80 mb-2">BUZZER PRESSED BY</p><p class="text-[6rem] leading-none font-black drop-shadow-lg mb-4">${window.quizData.teams.find(t=>t.id===state.buzzerWinner)?.name || 'Unknown'}</p><p class="text-3xl font-bold text-red-200">Time: ${((state.buzzerTime||0)/1000).toFixed(2)}s</p></div></div>` : ''}
+                    `;
+                } 
+                else if (r.type === 'order') {
+                    const isRevealed = state.showOrderAnswer;
+                    const items = q.options || [];
+                    const displayItems = isRevealed ? [0,1,2,3] : (state.scrambleSequence || [0,1,2,3]);
+                    specificHtml = `
+                        <div class="flex flex-col gap-5 w-full mt-10">
+                            ${displayItems.map((idx, i) => `
+                                <div class="bg-white/95 p-6 rounded-3xl shadow-xl border-4 ${isRevealed ? 'border-green-400 bg-green-50 shadow-[0_10px_30px_rgba(74,222,128,0.3)]' : 'border-slate-200'} flex items-center gap-8 text-4xl font-bold text-slate-800 transition-all break-words whitespace-normal">
+                                    <span class="w-16 h-16 bg-blue-100 text-blue-800 rounded-2xl flex items-center justify-center shrink-0 font-black">${i+1}</span>${items[idx]}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                else if(q.options) {
+                    specificHtml = `
+                        <div class="grid grid-cols-2 gap-8 mt-12 w-full">
+                            ${q.options.map((opt, i) => `
+                                <div class="bg-white/95 backdrop-blur-xl p-10 rounded-[2rem] shadow-2xl border-4 border-slate-200 flex items-center gap-6 break-words whitespace-normal">
+                                    <div class="w-20 h-20 rounded-[1.5rem] bg-blue-100 text-blue-700 flex items-center justify-center text-4xl font-black shrink-0 drop-shadow-sm">${String.fromCharCode(65+i)}</div>
+                                    <span class="text-4xl font-bold text-slate-800 leading-tight">${opt}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else if(r.type === 'buzzer' || r.type === 'tiebreaker') {
+                     specificHtml = state.buzzerWinner ? `<div class="fixed inset-0 z-[200] bg-slate-900/80 backdrop-blur-md flex items-center justify-center animate-[scaleIn_0.3s] p-4"><div class="bg-red-600 text-white px-16 py-12 rounded-[4rem] shadow-[0_20px_60px_rgba(220,38,38,0.6)] border-[10px] border-white text-center"><p class="text-3xl font-black uppercase tracking-widest opacity-80 mb-2">BUZZER PRESSED BY</p><p class="text-[7rem] leading-none font-black drop-shadow-lg mb-4">${window.quizData.teams.find(t=>t.id===state.buzzerWinner)?.name || 'Unknown'}</p><p class="text-3xl font-bold text-red-200">Reaction Time: ${((state.buzzerTime||0)/1000).toFixed(2)}s</p></div></div>` : `<div class="mt-20 text-center"><i class="fa-solid fa-hand-pointer text-[10rem] text-white/30 animate-pulse drop-shadow-xl"></i><p class="text-4xl font-black text-white/50 uppercase tracking-widest mt-8">Waiting for buzzer...</p></div>`;
+                }
+
+                container.innerHTML = `
+                    <div class="w-full flex flex-col items-center animate-[scaleIn_0.3s] max-w-[95%]">
+                        ${q.isSample ? `<div class="bg-red-600 text-white px-16 py-4 rounded-b-[2rem] font-black text-3xl uppercase tracking-widest shadow-[0_10px_30px_rgba(220,38,38,0.5)] mb-10 absolute top-0 animate-pulse border-x-4 border-b-4 border-red-800 z-50">नमूना प्रश्न (Sample - No Marks)</div>` : ''}
+                        
+                        <div class="flex justify-between items-end w-full mb-10 ${q.isSample ? 'mt-20' : ''}">
+                            <span class="text-3xl font-black bg-blue-600 text-white px-8 py-4 rounded-full uppercase shadow-lg border-4 border-blue-400">${r.name}</span>
+                            
+                            ${(!isResult && r.type !== 'buzzer' && r.type !== 'tiebreaker' && r.rules.time > 0) || (!isResult && r.type === 'charades') ? `
+                                <div class="flex gap-4">
+                                    <div class="bg-slate-900/95 backdrop-blur-xl px-10 py-5 rounded-[2rem] border-4 border-slate-600 shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex items-center gap-6 text-[5rem] lg:text-[7rem] font-black text-white tracking-wider leading-none" title="Timer">
+                                        <i class="fa-regular fa-clock text-slate-400 text-5xl"></i> <span id="proj-timer-num">${r.rules.time}s</span>
+                                    </div>
+                                    ${!q.isSample && r.type !== 'charades' && r.type !== 'buzzer' && r.type !== 'tiebreaker' ? `
+                                        <div class="bg-slate-900/95 backdrop-blur-xl px-8 py-5 rounded-[2rem] border-4 border-slate-600 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex gap-5 text-5xl font-black items-center" id="proj-active-pts">
+                                            <span class="text-emerald-500 drop-shadow-sm">+${r.rules.pts || 0}</span><span class="text-slate-600">|</span><span class="text-red-500 drop-shadow-sm">${-Math.abs(r.rules.neg || 0)}</span>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        ${(!isResult && r.type === 'charades') ? '' : `
+                            <div class="glass-panel p-16 rounded-[4rem] w-full text-center shadow-[0_20px_50px_rgba(0,0,0,0.2)] relative overflow-hidden border-2 border-white/40">
+                                ${q.imageUrl ? `<img src="${q.imageUrl}" class="w-full max-h-[400px] object-contain mb-8 rounded-3xl mx-auto shadow-lg border-4 border-slate-200" onerror="this.style.display='none'">` : ''}
+                                <h2 class="text-[3.5rem] lg:text-[4.5rem] font-black text-slate-800 leading-tight drop-shadow-sm break-words">${q.text}</h2>
+                            </div>
+                        `}
+                        ${specificHtml}
+                    </div>
+                `;
+            }
+            else if (state.status === 'final-leaderboard' || state.status === 'round-leaderboard') {
+                let teams = [...window.quizData.teams].sort((a,b) => b.score - a.score);
+                if(teams.length === 0) return;
+                
+                let rankedTeams = []; let currentRank = 1; let currentScore = teams[0].score;
+                teams.forEach((t, i) => {
+                    if(t.score < currentScore) { currentRank = i + 1; currentScore = t.score; }
+                    rankedTeams.push({...t, rank: currentRank});
+                });
+
+                const first = rankedTeams.filter(t => t.rank === 1);
+                const second = rankedTeams.filter(t => t.rank === 2);
+                const third = rankedTeams.filter(t => t.rank === 3);
+                const others = rankedTeams.filter(t => t.rank > 3);
+                
+                const titleText = state.status === 'final-leaderboard' ? 'विजेता (Winners)' : 'राउंड स्टैंडिंग्स (Round Standings)';
+
+                container.innerHTML = `
+                    <div class="w-full flex flex-col items-center animate-[scaleIn_0.5s] mt-10 h-full overflow-y-auto pb-20">
+                        <h2 class="text-[6rem] text-white font-black uppercase tracking-widest drop-shadow-[0_20px_20px_rgba(0,0,0,0.9)] mb-16">${titleText}</h2>
+                        <div class="flex items-end justify-center gap-8 mb-16 h-96 shrink-0">
+                            <!-- 2nd Place -->
+                            <div class="flex flex-col items-center justify-end h-[80%] w-72 relative group">
+                                <div class="text-center w-full mb-4 z-10">
+                                    ${second.map(t => `<p class="text-3xl font-black text-slate-200 bg-slate-800/95 px-4 py-2 rounded-xl mb-2 shadow-xl border border-slate-600">${t.name}</p>`).join('')}
+                                    <p class="text-2xl font-black text-slate-400 mt-2 bg-slate-900/50 inline-block px-4 py-1.5 rounded-full border border-slate-700">${second[0]?.score || 0} pts</p>
+                                </div>
+                                <div class="w-full bg-gradient-to-t from-slate-600 to-slate-400 h-full rounded-t-[3rem] border-t-8 border-slate-200 flex justify-center pt-8 shadow-[0_0_50px_rgba(148,163,184,0.6)]"><span class="text-7xl font-black text-slate-800/50 drop-shadow-md">2</span></div>
+                            </div>
+                            <!-- 1st Place -->
+                            <div class="flex flex-col items-center justify-end h-full w-80 relative z-20 group">
+                                <i class="fa-solid fa-crown absolute -top-20 text-yellow-400 text-[6rem] drop-shadow-[0_0_40px_rgba(250,204,21,0.9)] animate-bounce z-30"></i>
+                                <div class="text-center w-full mb-4 z-10">
+                                    ${first.map(t => `<p class="text-4xl font-black text-slate-900 bg-yellow-400 px-5 py-3 rounded-2xl mb-2 shadow-2xl border-4 border-yellow-200">${t.name}</p>`).join('')}
+                                    <p class="text-3xl font-black text-yellow-400 drop-shadow-lg mt-3 bg-slate-900/50 inline-block px-5 py-2 rounded-full border border-yellow-500/50">${first[0]?.score || 0} pts</p>
+                                </div>
+                                <div class="w-full bg-gradient-to-t from-yellow-700 to-yellow-400 h-full rounded-t-[3rem] border-t-8 border-yellow-200 flex justify-center pt-8 shadow-[0_0_80px_rgba(250,204,21,0.8)] relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 mix-blend-overlay"></div>
+                                    <span class="text-[5rem] font-black text-yellow-900/50 drop-shadow-md relative z-10">1</span>
+                                </div>
+                            </div>
+                            <!-- 3rd Place -->
+                            <div class="flex flex-col items-center justify-end h-[60%] w-72 relative group">
+                                <div class="text-center w-full mb-4 z-10">
+                                    ${third.map(t => `<p class="text-3xl font-black text-orange-200 bg-orange-900/95 px-4 py-2 rounded-xl mb-2 shadow-xl border border-orange-700">${t.name}</p>`).join('')}
+                                    <p class="text-2xl font-black text-orange-400 mt-2 bg-slate-900/50 inline-block px-4 py-1.5 rounded-full border border-orange-900/50">${third[0]?.score || 0} pts</p>
+                                </div>
+                                <div class="w-full bg-gradient-to-t from-orange-900 to-orange-600 h-full rounded-t-[3rem] border-t-8 border-orange-400 flex justify-center pt-8 shadow-[0_0_50px_rgba(249,115,22,0.5)]"><span class="text-7xl font-black text-orange-950/50 drop-shadow-md">3</span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="w-full max-w-5xl bg-slate-800/80 backdrop-blur-md rounded-3xl p-8 border border-slate-600 shadow-2xl">
+                            <h3 class="text-center text-slate-400 font-bold uppercase tracking-widest mb-6 border-b border-slate-700 pb-4">सभी टीमें (All Teams)</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                ${others.map(t => `
+                                    <div class="flex justify-between items-center bg-slate-900 p-5 rounded-2xl border border-slate-700 shadow-inner">
+                                        <div><span class="text-white font-black text-2xl">${t.name}</span> <span class="text-sm text-slate-400 ml-2">Rank ${t.rank}</span><p class="text-sm text-slate-500 font-bold mt-1">${t.members?.join(', ')}</p></div>
+                                        <span class="text-4xl font-black text-blue-400">${t.score}</span>
+                                    </div>
+                                `).join('')}
+                                ${others.length === 0 ? '<p class="text-slate-500 text-center col-span-2">No other teams</p>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        window.updateTeamUI = () => {
+            if(!window.myTeamId || window.currentRole !== 'team') return;
+            const team = window.quizData.teams.find(t => t.id === window.myTeamId);
+            if(!team) return;
+
+            document.getElementById('team-identity-display').innerHTML = `<i class="fa-solid fa-user-group mr-2"></i> ${team.name}`;
+            document.getElementById('team-score-val').textContent = team.score;
+            
+            const state = window.quizData.state;
+            const wState = document.getElementById('team-state-waiting');
+            const aState = document.getElementById('team-state-active');
+            
+            if(['waiting', 'loading-question', 'rules', 'rulebook', 'round-intro', 'final-leaderboard', 'round-leaderboard', 'allocation', 'rapid-results', 'intermission'].includes(state.status)) {
+                wState.classList.remove('hidden'); aState.classList.add('hidden');
+                document.getElementById('team-score-display').classList.remove('hidden');
+                const tTitle = document.getElementById('team-wait-title');
+                if(tTitle) {
+                    if (state.status === 'intermission') tTitle.textContent = 'तैयार रहें!';
+                    else if (state.status === 'loading-question') tTitle.textContent = 'तैयार रहें...';
+                    else tTitle.textContent = 'प्रतीक्षा करें...';
+                }
+            } else if (state.status === 'active' || state.status === 'rapid' || state.status === 'question-result') {
+                wState.classList.add('hidden'); aState.classList.remove('hidden');
+                document.getElementById('team-score-display').classList.add('hidden');
+                const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+                document.getElementById('team-mode-badge').textContent = r?.name || 'Round';
+                renderTeamDynamicArea(r, state);
+            }
+        };
+
+        window.submitStandardAnswer = async (optionIndex) => {
+            const state = window.quizData.state;
+            const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+            if(!window.myTeamId || state.timerStoppedAt || window.timeUpLocked || state.teamAnswers?.[window.myTeamId] !== undefined) return;
+            
+            let payload = optionIndex;
+            if (r?.type === 'fastest') {
+                const elapsed = Date.now() - state.startTime;
+                payload = { o: optionIndex, t: elapsed };
+            }
+            try {
+                await updateDoc(window.stateDocRef, { [`teamAnswers.${window.myTeamId}`]: payload });
+            } catch(e) { console.error("Error submitting answer:", e); }
+        };
+
+        window.toggleRapidOption = (qId, optionIndex) => {
+            if(window.timeUpLocked || window.quizData.state.timerStoppedAt) return;
+            window.rapidAnswers = window.rapidAnswers || {};
+            window.rapidAnswers[qId] = optionIndex;
+            window.updateTeamUI();
+        };
+
+        window.submitRapidFireBatch = async () => {
+            const state = window.quizData.state;
+            if(state.teamAnswers?.[window.myTeamId]) return; 
+            try { await updateDoc(window.stateDocRef, { [`teamAnswers.${window.myTeamId}`]: window.rapidAnswers || {} }); window.rapidAnswers = {}; } catch(e) {}
+        };
+
+        window.pressBuzzer = async () => {
+            const state = window.quizData.state;
+            if(state.buzzerWinner || state.timerStoppedAt || window.timeUpLocked) return; 
+            document.getElementById('btn-team-buzzer').classList.add('sim-active');
+            try { 
+                const elapsed = Date.now() - state.startTime;
+                await updateDoc(window.stateDocRef, { buzzerWinner: window.myTeamId, buzzerTime: elapsed }); 
+            } catch(e) {}
+        };
+
+        window.selectOrderOption = (origIndex) => {
+            if(window.currentOrderSelection.includes(origIndex) || window.timeUpLocked) return; 
+            window.currentOrderSelection.push(origIndex);
+            
+            const btn = document.getElementById(`order-opt-${origIndex}`);
+            if(btn) btn.classList.add('opacity-30', 'pointer-events-none');
+            
+            const q = window.quizData.questions.find(x => x.id === window.quizData.state.activeQuestionId);
+            if(!q) return;
+
+            const slots = document.getElementById('order-selection-slots');
+            slots.innerHTML = window.currentOrderSelection.map((idx, step) => `<div class="bg-blue-100 text-blue-800 text-xs px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-sm border border-blue-200 break-words whitespace-normal"><span class="bg-blue-600 text-white w-5 h-5 rounded-md flex justify-center items-center text-[10px] font-black shrink-0">${step+1}</span> ${q.options[idx].substring(0,15)}...</div>`).join('');
+        };
+        
+        window.clearOrderSelection = () => {
+            if(window.timeUpLocked) return;
+            window.currentOrderSelection = [];
+            const state = window.quizData.state;
+            renderTeamDynamicArea(window.quizData.rounds.find(x=>x.id===state.activeRoundId), state);
+        };
+        
+        window.submitOrderAnswer = async () => {
+            if(window.currentOrderSelection.length !== 4 || window.timeUpLocked) return window.showAppAlert("Select all 4 options!");
+            try { await updateDoc(window.stateDocRef, { [`teamAnswers.${window.myTeamId}`]: window.currentOrderSelection }); } catch(e) {}
+        };
+
+        function renderTeamDynamicArea(round, state) {
+            const area = document.getElementById('team-dynamic-area');
+            if(!round) return;
+            
+            const isLocked = state.timerStoppedAt || window.timeUpLocked || false;
+
+            if(state.status === 'rapid') {
+                if(state.rapidTarget !== 'all' && state.rapidTarget !== window.myTeamId) {
+                    area.innerHTML = `<div class="text-center text-slate-500 font-bold"><i class="fa-solid fa-hourglass text-5xl mb-4 block text-blue-300 animate-pulse"></i>Other team's Rapid Fire in progress...</div>`;
+                    return;
+                }
+                const submittedAns = state.teamAnswers?.[window.myTeamId];
+                if(submittedAns || isLocked) {
+                    area.innerHTML = `<div class="text-center"><i class="fa-solid fa-circle-check text-6xl text-green-500 mb-4 shadow-lg rounded-full"></i><br><span class="font-black text-slate-700 text-xl">Answers Submitted / Locked</span></div>`;
+                    return;
+                }
+
+                const isSample = !!state.rapidIsSample;
+                let qs = window.quizData.questions.filter(x => x.roundId === round.id && !!x.isSample === isSample);
+                if (!isSample) qs = qs.slice(0, 10);
+                window.rapidAnswers = window.rapidAnswers || {};
+
+                let qsHtml = qs.map((q, i) => `
+                    <div class="bg-white p-5 rounded-2xl shadow-md border ${isSample?'border-orange-200':'border-slate-200'} mb-5 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full ${isSample?'bg-orange-500':'bg-blue-500'}"></div>
+                        ${q.imageUrl ? `<img src="${q.imageUrl}" class="w-full max-h-40 object-contain rounded-lg mb-3" onerror="this.style.display='none'">` : ''}
+                        <p class="font-black text-slate-800 text-sm mb-4 leading-tight break-words whitespace-normal">${i+1}. ${q.text}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${(q.options||[]).map((opt, oIdx) => `
+                                <button id="rapid-opt-${q.id}-${oIdx}" onclick="toggleRapidOption('${q.id}', ${oIdx})" class="p-3 border-2 border-slate-200 rounded-xl text-xs font-bold text-slate-700 text-left transition-all break-words whitespace-normal leading-snug ${window.rapidAnswers[q.id] === oIdx ? 'bg-blue-100 border-blue-500 text-blue-800 shadow-inner' : 'hover:border-blue-300'}">
+                                    ${String.fromCharCode(65+oIdx)}. ${opt}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
+                area.innerHTML = `
+                    <div class="w-full flex justify-between items-center mb-4 ${isSample?'bg-orange-900 border-orange-700':'bg-slate-900 border-slate-700'} text-white p-4 rounded-2xl sticky top-0 z-20 shadow-xl border">
+                        <span class="font-black uppercase text-xs ${isSample?'text-orange-200':'text-red-400'} flex items-center gap-2"><i class="fa-solid fa-${isSample?'vial':'bolt'}"></i> ${isSample?'प्रैक्टिस (PRACTICE)':'रैपिड फायर'}</span>
+                        <span id="team-rapid-timer" class="font-mono text-2xl font-black">${round.rules.time || 120}s</span>
+                    </div>
+                    <div class="w-full overflow-y-auto pb-24 px-1" id="rapid-scroll-area">${qsHtml}</div>
+                    <div class="absolute bottom-4 left-4 right-4 z-20">
+                        <button onclick="submitRapidFireBatch()" id="rapid-submit-btn" class="w-full py-4 ${isSample?'bg-orange-600 border-orange-400 shadow-[0_10px_30px_rgba(234,88,12,0.5)]':'bg-red-600 border-red-400 shadow-[0_10px_30px_rgba(220,38,38,0.5)]'} text-white font-black rounded-2xl text-xl uppercase tracking-widest active:scale-95 transition-all border-2"><i class="fa-solid fa-paper-plane mr-2"></i> Submit All</button>
+                    </div>
+                `;
+                return; 
+            }
+
+            if(state.status === 'question-result') {
+                 area.innerHTML = `<div class="text-center text-slate-500 font-bold"><i class="fa-solid fa-eye text-5xl mb-6 block text-emerald-400 animate-pulse"></i>Check Main Screen<br>for Results!</div>`;
+                 return;
+            }
+
+            const q = window.quizData.questions.find(x => x.id === state.activeQuestionId);
+            if(!q) return;
+
+            if(round.type === 'charades') {
+                if(state.performingTeamId === window.myTeamId) {
+                    area.innerHTML = `
+                        <div class="text-center w-full bg-purple-50 p-6 rounded-3xl border-2 border-purple-200 shadow-inner">
+                            <h2 class="text-2xl font-black text-purple-900 leading-tight mb-4 uppercase tracking-wider">आपकी टीम की बारी है! (Your Turn)</h2>
+                            <p class="text-base font-bold text-slate-700 mb-6">मंच पर जाएं। आयोजक आपको मुहावरा/शब्द बताएंगे।<br><span class="text-xs opacity-70">(Go to the stage to get your phrase from the Organizer.)</span></p>
+                            <p class="text-emerald-600 font-black text-lg animate-pulse bg-emerald-100 p-2 rounded-xl">समय चल रहा है... (Timer Running)</p>
+                        </div>
+                    `;
+                } else {
+                    area.innerHTML = `
+                        <div class="text-center w-full bg-slate-50 p-6 rounded-3xl border border-slate-200">
+                            <i class="fa-solid fa-masks-theater text-5xl mb-4 block text-purple-400/50 animate-bounce"></i>
+                            <p class="text-xl font-black text-slate-500 leading-tight">आपकी टीम की बारी नहीं है!<br>मंच पर गए सदस्य का अभिनय देखें।</p>
+                        </div>
+                    `;
+                }
+            } else if(round.type === 'hints' || round.type === 'buzzer' || round.type === 'tiebreaker') {
+                const iBuzzed = state.buzzerWinner === window.myTeamId;
+                const someoneElseBuzzed = state.buzzerWinner && state.buzzerWinner !== window.myTeamId;
+                area.innerHTML = `
+                    <button id="btn-team-buzzer" onclick="pressBuzzer()" class="w-48 h-48 sm:w-56 sm:h-56 rounded-full buzzer-btn flex items-center justify-center outline-none ${someoneElseBuzzed || isLocked ? 'buzzer-locked' : iBuzzed ? 'pulse-red' : ''}" ${state.buzzerWinner || isLocked ? 'disabled' : ''}>
+                        <span class="text-white font-black text-3xl sm:text-4xl tracking-widest uppercase drop-shadow-md">${iBuzzed ? 'LOCKED' : someoneElseBuzzed ? 'WAIT' : isLocked ? 'STOP' : 'BUZZ'}</span>
+                    </button>
+                    <p class="mt-8 text-sm font-bold text-slate-500 uppercase tracking-widest text-center bg-slate-100 p-3 rounded-xl border border-slate-200">${iBuzzed ? 'You pressed the buzzer! Speak now.' : someoneElseBuzzed ? 'Another team pressed.' : isLocked ? 'Timer Stopped.' : 'Tap fast to answer!'}</p>
+                `;
+            } else if (round.type === 'order') {
+                const submittedArr = state.teamAnswers?.[window.myTeamId];
+                if(submittedArr || isLocked) {
+                    area.innerHTML = `<div class="text-center"><i class="fa-solid fa-circle-check text-6xl text-green-500 mb-4 shadow-lg rounded-full"></i><br><span class="font-black text-slate-700 text-xl">Answer Submitted / Locked!</span></div>`;
+                } else {
+                    const items = q.options || [];
+                    const scramble = state.scrambleSequence || [0,1,2,3];
+                    window.currentOrderSelection = window.currentOrderSelection || [];
+                    area.innerHTML = `
+                        ${q.imageUrl ? `<img src="${q.imageUrl}" class="w-full max-h-40 object-contain rounded-lg mb-4 shadow-md border border-slate-200" onerror="this.style.display='none'">` : ''}
+                        <p class="text-[10px] font-black text-blue-600 uppercase mb-4 w-full text-center bg-blue-50 p-2 rounded-lg">सही क्रम में टैप करें (Tap in chronological order)</p>
+                        <div class="flex flex-col gap-3 w-full mb-6" id="order-options-list">
+                            ${scramble.map(idx => `<button id="order-opt-${idx}" onclick="selectOrderOption(${idx})" class="p-4 bg-white border-2 border-slate-200 rounded-xl font-bold text-slate-700 text-left w-full shadow-sm hover:border-blue-400 active:scale-95 transition-all text-sm leading-tight break-words whitespace-normal ${window.currentOrderSelection?.includes(idx) ? 'opacity-30 pointer-events-none' : ''}">${items[idx]}</button>`).join('')}
+                        </div>
+                        <div class="w-full p-4 bg-slate-50 border-2 border-slate-200 rounded-2xl min-h-[80px] flex gap-2 flex-wrap items-center justify-center mb-4 shadow-inner" id="order-selection-slots">
+                            ${(window.currentOrderSelection?.length > 0) ? window.currentOrderSelection.map((idx, step) => `<div class="bg-blue-100 text-blue-800 text-xs px-4 py-2 rounded-lg font-bold flex items-center gap-2 shadow-sm border border-blue-200 break-words whitespace-normal"><span class="bg-blue-600 text-white w-5 h-5 rounded-md flex justify-center items-center text-[10px] font-black shrink-0">${step+1}</span> ${q.options[idx].substring(0,15)}...</div>`).join('') : `<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Selected sequence will appear here</span>`}
+                        </div>
+                        <div class="flex gap-2 w-full mt-auto">
+                            <button onclick="clearOrderSelection()" id="order-clear-btn" class="py-4 px-6 bg-slate-200 text-slate-700 font-black rounded-xl active:scale-95 transition">Clear</button>
+                            <button onclick="submitOrderAnswer()" id="order-submit-btn" class="flex-grow py-4 bg-blue-600 text-white font-black rounded-xl shadow-lg shadow-blue-500/30 uppercase tracking-widest text-lg active:scale-95 transition">Submit</button>
+                        </div>
+                    `;
+                }
+            } else if (q.options && q.options.length > 0) {
+                const submittedAns = state.teamAnswers?.[window.myTeamId];
+                if(submittedAns !== undefined || isLocked) {
+                    area.innerHTML = `<div class="text-center"><i class="fa-solid fa-circle-check text-6xl text-emerald-500 mb-4 shadow-lg rounded-full"></i><br><span class="font-black text-slate-700 text-xl">उत्तर दर्ज हो गया! (Answer Locked)</span></div>`;
+                } else {
+                    area.innerHTML = `
+                        <div class="w-full flex flex-col gap-3">
+                            <p class="text-xs font-black text-blue-600 uppercase mb-2 text-center bg-blue-50 py-2 rounded-lg">अपना विकल्प चुनें (Select Your Option)</p>
+                            ${q.options.map((opt, i) => `
+                                <button onclick="submitStandardAnswer(${i})" class="w-full p-4 bg-white border-2 border-slate-200 hover:border-blue-500 rounded-2xl flex items-center gap-4 text-left font-bold text-slate-800 shadow-sm active:scale-95 transition-all break-words whitespace-normal leading-snug">
+                                    <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 font-black flex items-center justify-center shrink-0">${String.fromCharCode(65+i)}</span>
+                                    <span class="text-base">${opt}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            } else {
+                area.innerHTML = `<div class="text-center text-slate-500 font-bold"><i class="fa-solid fa-mobile-screen text-5xl mb-6 block text-blue-300"></i>मुख्य स्क्रीन देखें (Look at main screen)</div>`;
+            }
+        }
+
+        window.updateLiveOrgPanel = () => {
+            if(window.currentRole !== 'organizer') return;
+            const panel = document.getElementById('org-live-view');
+            const state = window.quizData.state;
+
+            if (state.status === 'loading-question') {
+                 panel.innerHTML = `
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-700 shadow-lg text-center h-full flex flex-col justify-center">
+                        <i class="fa-solid fa-spinner fa-spin text-5xl text-blue-400 mb-4"></i>
+                        <h3 class="text-xl font-black text-white uppercase tracking-widest mb-2">Preparing Question...</h3>
+                    </div>
+                `;
+                return;
+            }
+
+            if(state.status === 'allocation') {
+                panel.innerHTML = `
+                    <div class="bg-slate-900 rounded-xl p-6 border border-slate-700 shadow-lg text-center h-full flex flex-col justify-center">
+                        <i class="fa-solid fa-desktop text-5xl text-blue-400 mb-4 animate-pulse"></i>
+                        <h3 class="text-xl font-black text-white uppercase tracking-widest mb-2">टीमें प्रोजेक्ट की जा रही हैं</h3>
+                        <div class="max-h-48 overflow-y-auto mb-4 p-3 bg-slate-800 rounded-xl border border-slate-600 text-left space-y-2">
+                            ${(state.teamAllocation||[]).map(t => `<div class="flex justify-between items-center bg-slate-700 p-2 rounded"><span class="text-white font-bold text-sm">${t.name}</span><span class="text-xs bg-emerald-500 text-white px-2 py-1 rounded font-black">PIN: ${t.pin}</span></div>`).join('')}
+                        </div>
+                        <button onclick="setMainScreenState('intermission')" class="py-3 px-6 bg-red-600 hover:bg-red-500 text-white rounded-xl font-black shadow-lg transition active:scale-95 uppercase tracking-widest border border-red-500"><i class="fa-solid fa-arrow-left mr-2"></i> वापस जाएं (Clear & Return)</button>
+                    </div>
+                `;
+                return;
+            }
+
+            if(state.status === 'rapid' || state.status === 'rapid-results') {
+                const submissions = state.teamAnswers || {};
+                const totalSub = Object.keys(submissions).length;
+                panel.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-2 py-1 bg-red-600 text-white text-[10px] font-black rounded uppercase shadow"><i class="fa-solid fa-bolt"></i> RAPID FIRE ${state.status === 'rapid-results' ? 'RESULTS' : 'RUNNING'}</span>
+                    </div>
+                    <div class="bg-slate-900 rounded-xl p-4 border border-slate-700 mt-4 shadow-lg">
+                         <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-3 flex-wrap gap-2">
+                             <span class="text-slate-300 font-bold text-sm">Teams Submitted: <span class="text-white bg-slate-700 px-2 rounded-full ml-1">${totalSub}</span></span>
+                             <div class="flex gap-2">
+                                <button onclick="evaluateRapidFireBatch()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-black text-xs shadow-lg transition active:scale-95"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Auto-Score & Reveal</button>
+                             </div>
+                         </div>
+                         <div class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                             ${Object.keys(submissions).map(tid => {
+                                 const t = window.quizData.teams.find(x=>x.id===tid);
+                                 return `<div class="flex justify-between items-center p-3 rounded-lg bg-slate-800 border border-slate-600"><span class="text-white font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-check-circle text-emerald-500"></i> ${t?.name}</span><span class="text-xs bg-blue-900/50 text-blue-300 border border-blue-500/30 px-2 py-1 rounded font-black">${Object.keys(submissions[tid]).length} Answered</span></div>`;
+                             }).join('')}
+                         </div>
+                     </div>
+                `;
+                return;
+            }
+
+            if(state.status === 'active' || state.status === 'question-result') {
+                const q = window.quizData.questions.find(x => x.id === state.activeQuestionId);
+                const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+                if(!q || !r) return;
+                
+                const isResult = state.status === 'question-result';
+                let specificHtml = '';
+                
+                if(!isResult && r.type === 'charades') {
+                    specificHtml = `
+                        <div class="p-6 bg-purple-900 rounded-2xl border-4 border-purple-400 text-center shadow-2xl mt-4">
+                            <p class="text-[10px] text-purple-300 font-bold uppercase tracking-widest mb-1">Actor Remote (मूक अभिनय)</p>
+                            <p class="text-sm font-bold text-purple-200 mb-6 bg-purple-950 p-2 rounded-lg border border-purple-800">Give this phone to the actor on stage. They will perform it now.</p>
+                            <p class="text-4xl font-black text-white mb-8 bg-purple-800 p-4 rounded-xl shadow-inner border border-purple-600 break-words">${q.text}</p>
+                            
+                            <div class="grid grid-cols-2 gap-3 mb-4 mt-6 border-t border-purple-700 pt-4">
+                                <button onclick="judgeStandard(true)" class="py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-black shadow transition active:scale-95 text-xs">Correct (+${r.rules.pts})</button>
+                                <button onclick="judgeStandard(false)" class="py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg font-black shadow transition active:scale-95 text-xs">Wrong (${-Math.abs(r.rules.neg || 0)})</button>
+                            </div>
+                        </div>
+                    `;
+                }
+                else if(!isResult && (r.type === 'hints' || r.type === 'buzzer' || r.type === 'tiebreaker')) {
+                    const bw = window.quizData.teams.find(t=>t.id===state.buzzerWinner);
+                    specificHtml = `
+                        <div class="bg-slate-900 rounded-xl p-5 border border-slate-700 text-center shadow-lg mt-4">
+                            <h4 class="text-xs font-black text-slate-500 uppercase tracking-widest mb-4">Buzzer Control</h4>
+                            ${bw ? `
+                                <div class="bg-blue-900/40 border border-blue-500/50 p-4 rounded-xl mb-4 shadow-inner">
+                                    <span class="text-blue-300 font-bold text-sm block mb-1">TEAM BUZZED:</span>
+                                    <span class="text-3xl font-black text-white drop-shadow-md">${bw.name}</span>
+                                    <span class="text-xs text-blue-200 font-bold block mt-1">Time: ${((state.buzzerTime||0)/1000).toFixed(2)}s</span>
+                                </div>
+                                <div class="grid grid-cols-3 gap-3 mb-2">
+                                    <button onclick="judgeBuzzer(true, ${r.type==='hints'})" class="py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-black shadow-lg transition active:scale-95"><i class="fa-solid fa-check block mb-1 text-xl"></i> Correct</button>
+                                    <button onclick="judgeBuzzer(false, ${r.type==='hints'})" class="py-3 bg-red-600 hover:bg-red-500 text-white rounded-xl font-black shadow-lg transition active:scale-95"><i class="fa-solid fa-xmark block mb-1 text-xl"></i> Wrong</button>
+                                    <button onclick="unlockBuzzer()" class="py-3 bg-slate-600 hover:bg-slate-500 text-white rounded-xl font-black shadow-lg transition active:scale-95"><i class="fa-solid fa-unlock block mb-1 text-xl"></i> Unlock</button>
+                                </div>
+                            ` : `<p class="text-slate-400 font-bold italic py-8 border-2 border-dashed border-slate-700 rounded-xl mb-4">Waiting for buzz...</p>`}
+                        </div>
+                    `;
+                }
+                else if (!isResult && r.type === 'fastest') {
+                    const subs = state.teamAnswers || {};
+                    const ansList = Object.entries(subs).map(([tid, data]) => ({ tid, ...data })).sort((a,b) => a.t - b.t);
+                    specificHtml = `
+                        <div class="p-4 bg-slate-900 rounded-2xl border border-slate-700 shadow-inner mt-4">
+                            <div class="flex justify-between items-center mb-2 border-b border-slate-700 pb-2">
+                                <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Fastest Submissions</h4>
+                            </div>
+                            <div class="space-y-2 max-h-40 overflow-y-auto">
+                                ${ansList.map((ans, i) => {
+                                    const t = window.quizData.teams.find(x=>x.id===ans.tid);
+                                    const isCorrect = q.options[ans.o] === q.answer;
+                                    return `<div class="flex justify-between items-center p-2 rounded bg-slate-800 border border-slate-700">
+                                        <span class="text-white font-bold text-sm"><span class="text-slate-500 mr-2">${i+1}.</span>${t?.name}</span>
+                                        <div class="flex gap-2 items-center">
+                                            <span class="text-xs ${isCorrect ? 'text-emerald-400' : 'text-red-400'} font-bold">${isCorrect ? 'Correct' : 'Wrong'}</span>
+                                            <span class="text-xs bg-slate-700 text-white px-2 py-1 rounded font-mono">${(ans.t/1000).toFixed(2)}s</span>
+                                        </div>
+                                    </div>`;
+                                }).join('')}
+                                ${ansList.length === 0 ? '<p class="text-xs text-slate-500 italic py-2">No answers locked yet...</p>' : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+                else if (!isResult && r.type === 'order') {
+                     const submissions = state.teamAnswers || {};
+                     const totalSub = Object.keys(submissions).length;
+                     specificHtml = `
+                         <div class="bg-slate-900 rounded-xl p-4 border border-slate-700 shadow-lg mt-4">
+                             <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-3">
+                                 <span class="text-slate-300 font-bold text-sm">Answers Submitted: <span class="text-white bg-slate-700 px-2 rounded-full ml-1">${totalSub}</span></span>
+                             </div>
+                             <div class="space-y-2 max-h-48 overflow-y-auto pr-2 mb-2">
+                                 ${Object.keys(submissions).map(tid => {
+                                     const t = window.quizData.teams.find(x=>x.id===tid);
+                                     const ans = submissions[tid];
+                                     const isCorrect = JSON.stringify(ans) === JSON.stringify([0,1,2,3]);
+                                     return `<div class="flex justify-between items-center p-3 rounded-lg ${isCorrect ? 'bg-emerald-900/40 border border-emerald-500/50' : 'bg-red-900/40 border border-red-500/50'}">
+                                        <span class="text-white font-bold text-sm">${t?.name}</span>
+                                        <div class="flex items-center gap-3">
+                                            <span class="text-[10px] ${isCorrect ? 'text-emerald-400 bg-emerald-950 px-2 py-1' : 'text-red-400 bg-red-950 px-2 py-1'} rounded font-black uppercase tracking-wider">LOCKED</span>
+                                        </div>
+                                     </div>`;
+                                 }).join('')}
+                             </div>
+                         </div>
+                     `;
+                }
+                else if (!isResult && r.type === 'standard') {
+                    const submissions = state.teamAnswers || {};
+                    const totalSub = Object.keys(submissions).length;
+                    specificHtml = `
+                        <div class="p-4 bg-slate-900 rounded-2xl border border-slate-700 shadow-inner mt-4">
+                             <div class="flex justify-between items-center mb-4 border-b border-slate-700 pb-3">
+                                 <span class="text-slate-300 font-bold text-sm">Answers Submitted: <span class="text-white bg-slate-700 px-2 rounded-full ml-1">${totalSub}</span></span>
+                             </div>
+                            <div class="space-y-2 max-h-48 overflow-y-auto pr-2 mb-2">
+                                 ${Object.keys(submissions).map(tid => {
+                                     const t = window.quizData.teams.find(x=>x.id===tid);
+                                     return `<div class="flex justify-between items-center p-3 rounded-lg bg-slate-800 border border-slate-600"><span class="text-white font-bold text-sm">${t?.name}</span><span class="text-[10px] text-blue-400 bg-blue-950 border border-blue-500/30 px-2 py-1 rounded font-black uppercase">LOCKED</span></div>`;
+                                 }).join('')}
+                             </div>
+                        </div>
+                    `;
+                }
+
+                const revealFn = (r.type === 'standard' || r.type === 'order' || r.type === 'fastest') ? 'evaluateAndReveal()' : 'showQuestionResult()';
+                const revealText = (r.type === 'standard' || r.type === 'order' || r.type === 'fastest') ? 'Reveal & Auto-Score' : 'Reveal Answer';
+
+                panel.innerHTML = `
+                    <div class="flex-grow flex flex-col pb-20">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-2 py-1 bg-blue-600 text-white text-[10px] font-black rounded uppercase shadow">${r.name}</span>
+                            ${q.isSample ? `<span class="px-2 py-1 bg-red-600 text-white text-[10px] font-black rounded uppercase shadow animate-pulse">SAMPLE</span>` : ''}
+                            ${isResult ? `<span class="px-2 py-1 bg-emerald-600 text-white text-[10px] font-black rounded uppercase shadow">RESULT SHOWN</span>` : ''}
+                        </div>
+                        ${r.type !== 'charades' ? `<p class="text-lg font-black text-white leading-snug mb-4 break-words">${q.text}</p>` : ''}
+                        ${q.answer && r.type !== 'charades' ? `<div class="bg-emerald-900/30 border border-emerald-500/30 p-4 rounded-xl mb-2 shadow-inner">
+                            <span class="text-[10px] font-black text-emerald-500 uppercase tracking-widest block mb-1">Correct Answer</span>
+                            <p class="text-emerald-100 font-bold text-lg">${q.answer === 'order' ? 'Check sequence below' : q.answer}</p>
+                        </div>` : ''}
+                        ${specificHtml}
+                    </div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-3 bg-slate-900 border-t border-slate-700 flex flex-col gap-2">
+                        ${!isResult ? `<button onclick="${revealFn}" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-black shadow-lg transition active:scale-95 text-sm uppercase tracking-widest"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i> ${revealText}</button>` : ''}
+                    </div>
+                `;
+            } else {
+                panel.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-slate-500 font-bold uppercase tracking-widest text-sm text-center"><i class="fa-solid fa-tv text-5xl block mb-4 opacity-40"></i><span>Select a question<br>to launch on projector</span></div>`;
+            }
+        };
+
+        window.evaluateAndReveal = async () => {
+            const state = window.quizData.state;
+            const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+            const q = window.quizData.questions.find(x => x.id === state.activeQuestionId);
+            if(!r || !q) return;
+
+            const batch = writeBatch(db);
+            const subs = state.teamAnswers || {};
+            let scoreEvents = [];
+
+            let fffWinnerId = null;
+            if (r.type === 'fastest') {
+                const correctAnswers = Object.entries(subs).filter(([tid, data]) => q.options[data.o] === q.answer).sort((a,b) => a[1].t - b[1].t);
+                if(correctAnswers.length > 0) fffWinnerId = correctAnswers[0][0];
+            }
+
+            for (const [tid, ans] of Object.entries(subs)) {
+                const team = window.quizData.teams.find(t => t.id === tid);
+                if (!team) continue;
+
+                let isCorrect = false;
+                let ptsToAdd = 0;
+
+                if (r.type === 'order') {
+                    isCorrect = JSON.stringify(ans) === JSON.stringify([0,1,2,3]);
+                    ptsToAdd = isCorrect ? (r.rules.pts||0) : -Math.abs(r.rules.neg||0);
+                } else if (r.type === 'fastest') {
+                    if (tid === fffWinnerId) { ptsToAdd = r.rules.pts || 0; } 
+                    else { ptsToAdd = -Math.abs(r.rules.neg||0); }
+                } else if (r.type === 'standard') {
+                    isCorrect = q.options[ans.o !== undefined ? ans.o : ans] === q.answer;
+                    ptsToAdd = isCorrect ? (r.rules.pts||0) : -Math.abs(r.rules.neg||0);
+                }
+
+                if (ptsToAdd !== 0 && !q.isSample) {
+                    batch.update(doc(db, window.teamsColl.path, tid), { score: (team.score || 0) + ptsToAdd });
+                    scoreEvents.push({ teamId: tid, points: ptsToAdd });
+                }
+            }
+
+            if(scoreEvents.length > 0) {
+                batch.update(window.stateDocRef, { lastScoreEvents: { id: window.generateSafeId(), events: scoreEvents } });
+            }
+
+            batch.update(window.stateDocRef, { status: 'question-result', showOrderAnswer: (r.type === 'order'), timerStoppedAt: Date.now() });
+            
+            try {
+                await batch.commit();
+            } catch(e) { window.showAppAlert("Error auto-scoring question!"); }
+        };
+
+        window.judgeStandard = async (isCorrect) => {
+            const tid = document.getElementById('org-active-team')?.value || window.quizData.state.performingTeamId;
+            const r = window.quizData.rounds.find(x => x.id === window.quizData.state.activeRoundId);
+            if(!tid && r?.type !== 'charades') return window.showAppAlert("Select a team first!");
+            if(!r) return; 
+            
+            let pts = 0;
+            if (isCorrect) {
+                pts = Number(r.rules.pts !== undefined ? r.rules.pts : 10);
+            } else {
+                pts = -Math.abs(r.rules.neg !== undefined ? r.rules.neg : 0);
+            }
+            
+            if(r.type === 'charades' && !tid) {} else {
+                if(tid && pts !== 0) await window.awardPoints(tid, pts);
+            }
+            if(isCorrect) await window.showQuestionResult();
+        };
+
+        window.judgeBuzzer = async (isCorrect, isHintsRound = false) => {
+            const state = window.quizData.state;
+            const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+            const q = window.quizData.questions.find(x => x.id === state.activeQuestionId);
+            if(!r || !q || !state.buzzerWinner || q.isSample) { return; }
+
+            let ptsToAdd = 0;
+            if(isCorrect) {
+                if(isHintsRound) {
+                    const elapsedSec = Math.floor(((state.buzzerTime || 0)) / 1000);
+                    const hintsShown = Math.floor(elapsedSec / (r.rules.autoTime || 10));
+                    
+                    if(hintsShown === 0) ptsToAdd = 20;
+                    else if(hintsShown === 1) ptsToAdd = 15;
+                    else if(hintsShown === 2) ptsToAdd = 10;
+                    else ptsToAdd = 5;
+                } else { ptsToAdd = Number(r.rules.pts || 10); }
+                
+                await window.awardPoints(state.buzzerWinner, ptsToAdd);
+                await window.showQuestionResult(); 
+            } else {
+                ptsToAdd = -Math.abs(r.rules.neg !== undefined ? r.rules.neg : -10);
+                if (ptsToAdd !== 0) await window.awardPoints(state.buzzerWinner, ptsToAdd);
+                await window.unlockBuzzer(); 
+            }
+        };
+
+        window.evaluateRapidFireBatch = async () => {
+            const state = window.quizData.state;
+            const r = window.quizData.rounds.find(x => x.id === state.activeRoundId);
+            if(!r) return;
+            const isSample = !!state.rapidIsSample;
+            let qs = window.quizData.questions.filter(x => x.roundId === r.id && !!x.isSample === isSample);
+            if(!isSample) qs = qs.slice(0, 10);
+            
+            const subs = state.teamAnswers || {};
+            if(Object.keys(subs).length === 0) {
+                 if(!confirm("No submissions recorded. Reveal results anyway?")) return;
+            }
+
+            try {
+                const batch = writeBatch(db);
+                let scoreEvents = [];
+
+                for(const tid of Object.keys(subs)) {
+                    const team = window.quizData.teams.find(x=>x.id===tid);
+                    if(!team) continue;
+                    const ansObj = subs[tid]; 
+                    let correctCount = 0; let wrongCount = 0;
+
+                    for(const qId of Object.keys(ansObj)) {
+                        const q = qs.find(x=>x.id===qId);
+                        if(q && q.options) {
+                            const chosenText = q.options[ansObj[qId]];
+                            if(chosenText && chosenText.trim().toLowerCase() === q.answer.trim().toLowerCase()) correctCount++;
+                            else wrongCount++;
+                        }
+                    }
+                    if(!isSample) {
+                        const ptsGained = (correctCount * (r.rules.pts || 0)) + (wrongCount * -Math.abs(r.rules.neg !== undefined ? r.rules.neg : -5));
+                        if(ptsGained !== 0) {
+                            batch.update(doc(db, window.teamsColl.path, tid), { score: (team.score || 0) + ptsGained });
+                            scoreEvents.push({ teamId: tid, points: ptsGained });
+                        }
+                    }
+                }
+
+                if(scoreEvents.length > 0) {
+                    batch.update(window.stateDocRef, { lastScoreEvents: { id: window.generateSafeId(), events: scoreEvents } });
+                }
+
+                batch.update(window.stateDocRef, { status: 'rapid-results', timerStoppedAt: Date.now() });
+                await batch.commit();
+            } catch(e) { window.showAppAlert("Error awarding points"); }
+        };
+
+    </script>
+</body>
+</html>
