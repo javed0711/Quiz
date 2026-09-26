@@ -532,17 +532,10 @@
             } catch(e){}
         };
 
+//Configuration Firebase
         const appId = typeof window.__app_id !== 'undefined' ? window.__app_id : 'pakhwada-quiz-2026';
-        let configToUse = { apiKey: "AIzaSyCa8XbdZayPaxQ8iF8GLaHgwcFeY1K_uYc",
-  authDomain: "pakhwada-quiz-2026.firebaseapp.com",
-  projectId: "pakhwada-quiz-2026",
-  storageBucket: "pakhwada-quiz-2026.firebasestorage.app",
-  messagingSenderId: "256566098463",
-  appId: "1:256566098463:web:05f4f3ffe5ff6e6bc8f32a"};
-
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+        let configToUse = { apiKey: "AIzaSyCa8XbdZayPaxQ8iF8GLaHgwcFeY1K_uYc",  authDomain: "pakhwada-quiz-2026.firebaseapp.com",  projectId: "pakhwada-quiz-2026", storageBucket: "pakhwada-quiz-2026.firebasestorage.app",  messagingSenderId: "256566098463",  appId: "1:256566098463:web:05f4f3ffe5ff6e6bc8f32a"};
+//Configuration Firebase End
         
         if(typeof window.__firebase_config !== 'undefined') {
             try { configToUse = typeof window.__firebase_config === 'string' ? JSON.parse(window.__firebase_config) : window.__firebase_config; } catch(e){}
